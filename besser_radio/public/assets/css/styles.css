@@ -1,0 +1,414 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+:root {
+    --primary-color: #0b1e67;
+    --primary-color-hover: #112a8d;
+}
+
+ body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .shadow-hover {
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.shadow-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(11, 30, 103, 0.2);
+}
+
+.transition-scale {
+    transition: transform 0.5s ease;
+}
+
+.shadow-hover:hover .transition-scale {
+    transform: scale(1.05);
+}
+
+.hover-primary:hover {
+    color: var(--primary-color-hover) !important;
+}
+
+.object-cover {
+    object-fit: cover;
+}
+
+
+  .image-home {
+    height: 90vh;
+    background: linear-gradient(to right, rgba(0,0,0,0.75) 100%, transparent), 
+                url('../img/podcast.jpg') no-repeat center center;
+    background-size: cover;
+
+  }
+
+  .image-noticias {
+    height: 50vh;
+    background: linear-gradient(to right, rgba(0,0,0,0.75) 100%, transparent), 
+                url('../img/noticias.jpeg') no-repeat center center;
+    background-size: cover;
+
+  }
+
+  .image-categorias {
+    height: 50vh;
+    background: linear-gradient(to right, rgba(0,0,0,0.75) 100%, transparent), 
+                url('../img/001.jpg') no-repeat center center;
+    background-size: cover;
+
+  }
+  
+  .nav-link{
+    color: #fff !important;
+  }
+
+  .navbar.navbar-dark {
+    background-color: transparent; /* Inicialmente sin fondo */
+    transition: background-color 0.3s ease-in-out;
+}
+
+.navbar.navbar-dark.show-bg {
+    background-color: var(--primary-color) /* Fondo oscuro cuando está abierto */
+}
+
+
+  .play-button {
+    border-radius: 50px; /* Bordes redondeados */
+    width: 60px; /* Ajustamos el tamaño para que sea más circular */
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0; /* Evitamos padding adicional */
+    background-color: var(--primary-color);
+    transition: background-color 1s ease, transform
+}
+
+.play-button i {
+    font-size: 30px; /* Icono más grande */
+    color: white;
+}
+
+  .play-button:hover {
+    background-color: var(--primary-color-hover);
+    transform: scale(1.05); /* Efecto de zoom al pasar el cursor */
+  }
+
+.last-title{
+    color: var(--primary-color);
+}
+
+ /* Estilo para el título principal */
+.featured-title {
+    font-size: 32px; /* Tamaño grande */
+    font-weight: bold;
+    color: #000; /* Color negro */
+    margin-bottom: 10px;
+}
+
+/* Estilo para el enlace "VIEW ALL SHOWS" */
+.view-all {
+    font-size: 14px;
+    color: #777; /* Color gris */
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espaciado entre el texto y la flecha */
+}
+
+.view-all:hover {
+    color: #000; /* Hace que se oscurezca al pasar el cursor */
+}
+
+/* Flecha al lado del enlace */
+.view-all::after {
+    content: "→"; /* Agregamos la flecha */
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.social-section {
+    background: linear-gradient(to right, rgba(0,0,0,0.75) 100%, transparent), 
+                url('../img/backgroundredessociales.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 40px 0;
+    width: 100%; /* Ocupa todo el ancho */
+    text-align: center;
+}
+
+/* Botones sociales */
+.social-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 130px;
+    height: 130px;
+    border-radius: 10px;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 15px;
+    background-color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+/* Ícono más grande */
+.social-btn i {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.social-btn:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el cursor */
+    background-color: var(--primary-color-hover);
+}
+ /* Estilos de la izquierda */
+
+ .left-show {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: nowrap; /* Mantiene alineado en pantallas grandes */
+}
+
+.left-show img {
+    width: 250px;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.left-info {
+    display: flex;
+    flex-direction: column; /* Cambiamos "row" a "column" */
+    align-items: flex-start;
+    gap: 5px; /* Espacio entre título y episodio */
+    width: 100%;
+}
+
+/* Ajustamos los elementos dentro del texto */
+.show-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.episode-count {
+    font-size: 14px;
+    color: #666;
+}
+
+.show-title-principal {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.episode-count-principal {
+    font-size: 14px;
+    color: #666;
+}
+
+.show-description {
+    font-size: 14px;
+    color: #555;
+    max-width: 65%; 
+}
+
+
+/* Estilos de la derecha */
+.right-show-small {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.right-show-small img {
+    width: 100px;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.small-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+/* Línea separadora entre bloques de noticias */
+.news-block {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+
+/*Footer*/
+
+/* Estilos generales del footer */
+.footer {
+    background-color: #181818;
+    color: #fff;
+    padding: 60px 0;
+}
+
+/* Estilo del logo */
+.footer-logo {
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Descripción */
+.footer-description {
+    font-size: 14px;
+    color: #bbb;
+    margin-bottom: 20px;
+}
+
+/* Botón */
+.footer-btn {
+    display: inline-block;
+    background-color: #57c68a;
+    color: #fff;
+    padding: 12px 18px;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.footer-btn:hover {
+    background-color: #45a169;
+}
+
+/* Títulos */
+.footer-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Listas */
+.footer-list {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-list li {
+    margin-bottom: 10px;
+}
+
+.footer-list a {
+    color: #bbb;
+    font-size: 16px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-list a:hover {
+    color: #57c68a;
+}
+
+/* Redes sociales */
+
+.title-social{
+    color: white;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px; /* Espacio entre el título y los iconos */
+}
+
+.social-icons a {
+    font-size: 24px;
+    color: #bbb;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #57c68a;
+}
+
+/* Línea de copyright */
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #444;
+    padding-top: 25px;
+    font-size: 14px;
+}
+
+.footer-bottom a {
+    color: #bbb;
+    margin-left: 15px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-bottom a:hover {
+    color: #57c68a;
+}
+
+
+
+@media (max-width: 992px) { /* Ajuste para tablets y móviles */
+    .left-show {
+        flex-direction: column; /* En móviles, imagen arriba y texto abajo */
+        align-items: flex-start;
+    }
+
+    .left-show img {
+        width: 100%; /* Imagen toma todo el ancho */
+    }
+
+    .right-show-small {
+       
+        align-items: start;
+    }
+
+    .right-show-small img {
+        width: 40%;
+    }
+    .social-section {
+        padding: 20px 0; /* Menos espacio en móvil */
+    }
+
+    .social-btn {
+        width: 100px;
+        height: 100px;
+        font-size: 16px;
+    }
+
+    .social-btn i {
+        font-size: 28px; /* Ícono más pequeño en móvil */
+    }
+
+    .show-title-principal {
+        font-size: 22px; /* Título más pequeño */
+    }
+
+    .show-description {
+        margin-bottom: 20px;
+    }
+    
+    .episode-count-principal {
+        font-size: 18px; /* Tamaño más pequeño */
+    }
+
+    .show-title {
+        font-size: 14px; /* Título más pequeño */
+    }
+
+    .episode-count {
+        font-size: 12px; /* Tamaño más pequeño */
+    }
+}
