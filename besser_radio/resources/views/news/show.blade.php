@@ -1,23 +1,101 @@
 <!DOCTYPE html>
+<html lang="en">
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $newsItem->title }} - Mi Sitio de Noticias</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{{ $newsItem->title }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
+</head>
+ 
+  <style>
+  
+  </style>
 </head>
 <body>
-    <a href="{{ route('home') }}">Volver a la lista de noticias</a>
 
-    <h1>{{ $newsItem->title }}</h1>
 
-    <p>Publicado el {{ $newsItem->publish_date->format('d/m/Y H:i') }} en <a href="{{ route('category.show', $newsItem->category->slug) }}">{{ $newsItem->category->name }}</a></p>
+@include('layouts.partials.header')
 
-    @if ($newsItem->image)
-        <img src="{{ asset('storage/' . $newsItem->image) }}" alt="{{ $newsItem->title }}" style="max-width: 600px; margin-bottom: 20px;">
-    @endif
 
-    <div class="news-content">
-        {!! $newsItem->content !!} {{-- Usamos !! para renderizar HTML si lo hay --}}
+  <!-- Seccion principal -->
+  <section class="image-noticias d-flex align-items-center text-white">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-12 text-start">
+          <p class="text-uppercase small"></p>
+          <h1 class="fw-bold text-center">Noticias</h1>
+          </p>
+        </div>
+      </div>
     </div>
+  </section>
+
+<div class="container mt-4 mb-5">
+  <div class="row">
+    <!-- Contenido principal -->
+    <div class="col-lg-8">
+      <p class="fecha-publicacion">
+        Publicado el {{ $newsItem->publish_date->format('d/m/Y') }} a las {{ $newsItem->publish_date->format('h:i a') }}
+        <span class="seccion">| {{ $newsItem->category->name }}</span>
+      </p>
+      <h2 class="fw-bold">{{ $newsItem->title }}</h2>
+      <p class="text-muted">{{ $newsItem->excerpt }}</p>
+
+      @if($newsItem->image)
+        <img src="{{ asset('storage/' . $newsItem->image) }}" alt="{{ $newsItem->title }}" class="img-fluid rounded mt-3 mb-1">
+        @if($newsItem->image_credits)
+          <p class="foto-creditos">{{ $newsItem->image_credits }}</p>
+        @endif
+      @else
+        No hay imagen disponible para esta noticia.
+      @endif
+
+      <div class="news-content mt-3">
+        {!! $newsItem->content !!}
+      </div>
+    </div>
+
+    <!-- Barra lateral con noticias aleatorias -->
+    <!-- Columna lateral para noticias aleatorias (4 columnas) -->
+<div class="col-lg-4">
+    <div class="sticky-top" style="top: 20px;">
+        <div class="sidebar-card">
+            <div class="card-header">
+                Última Hora
+            </div>
+            <div class="card-body">
+                @foreach($randomNews as $news)
+                    <div class="sidebar-news-item">
+                        <a href="{{ route('news.show', $news->slug) }}" class="news-link"></a>
+                        <div class="news-content">
+                            <h6>
+                                {{ $news->title }}
+                                @if($news->publish_date->gt(now()->subDays(3)))
+                                @endif
+                            </h6>
+                            <p class="news-meta">
+                                <i class="far fa-calendar-alt"></i>
+                                {{ $news->publish_date->format('d M Y') }}
+                            </p>
+                            @if($news->image)
+                                <img src="{{ asset('storage/'.$news->image) }}" class="sidebar-news-image" alt="{{ $news->title }}">
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
+  </div>
+</div>
+
+
+@include('layouts.partials.footer')
+
+
 </body>
 </html>

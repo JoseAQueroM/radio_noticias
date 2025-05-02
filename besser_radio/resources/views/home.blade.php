@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -10,12 +8,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
-  </head>
+</head>
 <body>
 
   <!-- Header -->
   @include('layouts.partials.header')
-
 
   <!-- Seccion principal -->
   <section class="image-home d-flex align-items-center text-white">
@@ -52,7 +49,6 @@
 
         <div id="episodeCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-
                 @foreach ($newsChunks as $key => $chunk)
                     <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
                         <div class="row g-3">
@@ -78,13 +74,10 @@
                         </div>
                     </div>
                 @endforeach
-
-                </div>
             </div>
         </div>
-    </section>
-
-   
+    </div>
+  </section>
 
 <!-- Redes sociales (Fondo completo y centrado) -->
 <div class="container-fluid my-5 social-section">
@@ -115,13 +108,17 @@
             <div class="col-md-8">
                 <div class="left-show">
                     @if ($leftNews)
-                        <img src="{{ $leftNews->image ? asset('storage/' . $leftNews->image) : 'https://via.placeholder.com/500x250?text=Sin+Imagen' }}" class="img-fluid rounded" alt="{{ $leftNews->title }}">
+                        <a href="{{ route('news.show', $leftNews->slug) }}">
+                            <img src="{{ $leftNews->image ? asset('storage/' . $leftNews->image) : 'https://via.placeholder.com/500x250?text=Sin+Imagen' }}" class="img-fluid rounded" alt="{{ $leftNews->title }}">
+                        </a>
                         <div class="left-info">
-                            <div class="show-title-principal">{{ $leftNews->title }}</div>
-                            <div class="episode-count-principal">{{ $leftNews->category->name ?? 'Sin Categoría' }}</div>
-                            <div class="show-description">
-                                {{ Str::limit($leftNews->content, 200, '...') }}
-                            </div>
+                            <a href="{{ route('news.show', $leftNews->slug) }}" class="text-decoration-none text-dark">
+                                <div class="show-title-principal">{{ $leftNews->title }}</div>
+                                <div class="episode-count-principal">{{ $leftNews->category->name ?? 'Sin Categoría' }}</div>
+                                <div class="show-description">
+                                    {{ Str::limit($leftNews->content, 200, '...') }}
+                                </div>
+                            </a>
                         </div>
                     @else
                         <p>No hay noticias para mostrar aquí.</p>
@@ -133,11 +130,13 @@
                 @if ($rightNews->count() > 0)
                     @foreach ($rightNews as $newsItem)
                         <div class="right-show-small">
-                            <img src="{{ $newsItem->image ? asset('storage/' . $newsItem->image) : 'https://via.placeholder.com/500x250?text=Sin+Imagen' }}" class="img-fluid rounded" alt="{{ $newsItem->title }}">
-                            <div class="small-info">
-                                <div class="show-title">{{ $newsItem->category->name ?? 'Sin Categoría' }}</div>
-                                <div class="episode-count">{{ Str::limit($newsItem->title, 50, '...') }}</div>
-                            </div>
+                            <a href="{{ route('news.show', $newsItem->slug) }}" class="d-flex text-decoration-none text-dark">
+                                <img src="{{ $newsItem->image ? asset('storage/' . $newsItem->image) : 'https://via.placeholder.com/500x250?text=Sin+Imagen' }}" class="img-fluid rounded" alt="{{ $newsItem->title }}" style="width: 100px; height: 100px; object-fit: cover;">
+                                <div class="small-info ms-3">
+                                    <div class="show-title">{{ $newsItem->category->name ?? 'Sin Categoría' }}</div>
+                                    <div class="episode-count">{{ Str::limit($newsItem->title, 50, '...') }}</div>
+                                </div>
+                            </a>
                         </div>
                     @endforeach
                 @else
@@ -156,6 +155,7 @@
                 <h2 class="footer-logo">Besser</h2>
                 <p class="footer-description">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                </p>
             </div>
 
             <!-- Tercera columna (Características) -->

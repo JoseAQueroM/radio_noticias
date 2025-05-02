@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Besser Podcast - Noticias</title>
+    <title>Noticias</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
@@ -12,7 +12,6 @@
 <body>
 
   @include('layouts.partials.header')
-
 
   <!-- Seccion principal -->
   <section class="image-noticias d-flex align-items-center text-white">
@@ -33,7 +32,7 @@
     <div class="news-block">
         @if ($allNews->isNotEmpty())
             @php
-                $chunks = $allNews->chunk(4);
+                $chunks = $allNews->chunk(3);
             @endphp
 
             @foreach ($chunks as $chunk)
@@ -43,7 +42,8 @@
                             @php
                                 $firstInChunk = $chunk->first();
                             @endphp
-                            <div class="left-show">
+                            <div class="left-show position-relative">
+                                <a href="{{ route('news.show', $firstInChunk->slug) }}" class="stretched-link"></a>
                                 @if ($firstInChunk->image)
                                     <img src="{{ asset('storage/' . $firstInChunk->image) }}" class="img-fluid rounded" alt="{{ $firstInChunk->title }}">
                                 @else
@@ -63,15 +63,18 @@
                     <div class="col-md-4">
                         @if ($chunk->count() > 1)
                             @foreach ($chunk->skip(1)->take(3) as $newsItem)
-                                <div class="right-show-small mb-3">
-                                    @if ($newsItem->image)
-                                        <img src="{{ asset('storage/' . $newsItem->image) }}" class="img-fluid rounded" alt="{{ $newsItem->title }}">
-                                    @else
-                                        <img src="https://via.placeholder.com/500x150?text=Sin+Imagen" class="img-fluid rounded" alt="Sin Imagen">
-                                    @endif
-                                    <div class="small-info">
-                                        <div class="show-title">{{ $newsItem->category->name ?? 'Sin Categoría' }}</div>
-                                        <div class="episode-count">{{ Str::limit($newsItem->title, 50, '...') }}</div>
+                                <div class="right-show-small mb-3 position-relative">
+                                    <a href="{{ route('news.show', $newsItem->slug) }}" class="stretched-link"></a>
+                                    <div class="d-flex">
+                                        @if ($newsItem->image)
+                                            <img src="{{ asset('storage/' . $newsItem->image) }}" class="img-fluid rounded me-3" alt="{{ $newsItem->title }}" style="width: 100px; height: 100px; object-fit: cover;">
+                                        @else
+                                            <img src="https://via.placeholder.com/500x150?text=Sin+Imagen" class="img-fluid rounded me-3" alt="Sin Imagen" style="width: 100px; height: 100px; object-fit: cover;">
+                                        @endif
+                                        <div class="small-info">
+                                            <div class="show-title">{{ $newsItem->category->name ?? 'Sin Categoría' }}</div>
+                                            <div class="episode-count">{{ Str::limit($newsItem->title, 50, '...') }}</div>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
@@ -79,9 +82,7 @@
                     </div>
                 </div>
             @endforeach
-            <div class="mt-4">
-                {{ $allNews->links() }}
-            </div>
+           
         @else
             <p>No hay noticias para mostrar.</p>
         @endif

@@ -5,33 +5,39 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
-use Illuminate\View\View; // Asegúrate de tener esta importación
 
 class CategoryController extends Controller
 {
-    /**
-     * Muestra un listado de todas las categorías.
-     */
-    public function index(): View
+    public function index()
     {
-        $categories = Category::withCount('news')->get(); // Obtiene todas las categorías y cuenta sus noticias relacionadas
-        return view('categories.index', ['categories' => $categories]);
+        $categories = Category::withCount('news')
+                            ->orderBy('name')
+                            ->get();
+
+        return view('categories.index', compact('categories'));
     }
 
-    /**
-     * Muestra las noticias de una categoría específica.
-     *
-     * @param  string  $slug
-     * @return View
-     */
-    public function show($slug): View
+    public function show($slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
-        $categoryNews = News::where('category_id', $category->id)
-            ->where('status', 'published')
-            ->orderBy('publish_date', 'desc')
-            ->paginate(10);
+        
+        // Obtener todas las noticias de la categoría (publicadas)
+        $categoryNews = $category->news()
+                                ->where('status', 'published')
+                                ->orderBy('publish_date', 'desc')
+                                ->get();
+        
+        // Obtener noticias aleatorias de otras categorías
+        $randomCategoryNews = News::where('status', 'published')
+                                ->where('category_id', '!=', $category->id)
+                                ->inRandomOrder()
+                                ->limit(4)
+                                ->get();
 
-        return view('category.show', ['category' => $category, 'categoryNews' => $categoryNews]);
+        return view('categories.show', [
+            'category' => $category,
+            'categoryNews' => $categoryNews,
+            'randomCategoryNews' => $randomCategoryNews
+        ]);
     }
 }
