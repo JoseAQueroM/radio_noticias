@@ -1,101 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ $newsItem->title }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
 </head>
- 
-  <style>
-  
-  </style>
+
 </head>
+
 <body>
 
 
-@include('layouts.partials.header')
+    @include('layouts.partials.header')
 
 
-  <!-- Seccion principal -->
-  <section class="image-noticias d-flex align-items-center text-white">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-12 text-start">
-          <p class="text-uppercase small"></p>
-          <h1 class="fw-bold text-center">Noticias</h1>
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-<div class="container mt-4 mb-5">
-  <div class="row">
-    <!-- Contenido principal -->
-    <div class="col-lg-8">
-      <p class="fecha-publicacion">
-        Publicado el {{ $newsItem->publish_date->format('d/m/Y') }} a las {{ $newsItem->publish_date->format('h:i a') }}
-        <span class="seccion">| {{ $newsItem->category->name }}</span>
-      </p>
-      <h2 class="fw-bold">{{ $newsItem->title }}</h2>
-      <p class="text-muted">{{ $newsItem->excerpt }}</p>
-
-      @if($newsItem->image)
-        <img src="{{ asset('storage/' . $newsItem->image) }}" alt="{{ $newsItem->title }}" class="img-fluid rounded mt-3 mb-1">
-        @if($newsItem->image_credits)
-          <p class="foto-creditos">{{ $newsItem->image_credits }}</p>
-        @endif
-      @else
-        No hay imagen disponible para esta noticia.
-      @endif
-
-      <div class="news-content mt-3">
-        {!! $newsItem->content !!}
-      </div>
-    </div>
-
-    <!-- Barra lateral con noticias aleatorias -->
-    <!-- Columna lateral para noticias aleatorias (4 columnas) -->
-<div class="col-lg-4">
-    <div class="sticky-top" style="top: 20px;">
-        <div class="sidebar-card">
-            <div class="card-header">
-                Última Hora
+    <!-- Seccion principal -->
+    <section class="image-noticias d-flex align-items-center text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-12 text-start">
+                    <p class="text-uppercase small"></p>
+                    <h1 class="fw-bold text-center">Noticias</h1>
+                    </p>
+                </div>
             </div>
-            <div class="card-body">
-                @foreach($randomNews as $news)
-                    <div class="sidebar-news-item">
-                        <a href="{{ route('news.show', $news->slug) }}" class="news-link"></a>
-                        <div class="news-content">
-                            <h6>
-                                {{ $news->title }}
-                                @if($news->publish_date->gt(now()->subDays(3)))
-                                @endif
-                            </h6>
-                            <p class="news-meta">
-                                <i class="far fa-calendar-alt"></i>
-                                {{ $news->publish_date->format('d M Y') }}
-                            </p>
-                            @if($news->image)
-                                <img src="{{ asset('storage/'.$news->image) }}" class="sidebar-news-image" alt="{{ $news->title }}">
-                            @endif
+        </div>
+    </section>
+
+    <div class="container mt-4 mb-5">
+        <div class="row">
+            <!-- Contenido principal -->
+            <div class="col-lg-8">
+                <p class="fecha-publicacion">
+                    Publicado el {{ $newsItem->publish_date->format('d/m/Y') }} a las {{ $newsItem->publish_date->format('h:i a') }}
+                    <span class="seccion">| {{ $newsItem->category->name }}</span>
+                </p>
+                <h2 class="fw-bold">{{ $newsItem->title }}</h2>
+                <p class="text-muted">{{ $newsItem->excerpt }}</p>
+
+                @if($newsItem->image)
+                <img src="{{ asset('storage/' . $newsItem->image) }}"
+                    alt="{{ $newsItem->title }}"
+                    class="img-fluid rounded mt-3 mb-1 mx-auto d-block"
+                    style="max-height: 500px; width: auto;"> 
+                @if($newsItem->image_credits)
+                <p class="foto-creditos">{{ $newsItem->image_credits }}</p>
+                @endif
+                @else
+                No hay imagen disponible para esta noticia.
+                @endif
+
+                <div class="news-content mt-3">
+                    {!! $newsItem->content !!}
+                </div>
+
+                <div class="container my-4">
+                    @if($relatedNews->count() > 0)
+                    <h3 class="mb-4" style="border-bottom: 4px solid #0b1e67; display: inline-block;">Noticias relacionadas</h3>
+                    <div class="row g-3">
+                        @foreach($relatedNews as $related)
+                        <div class="col-md-4">
+                            <a href="{{ route('news.show', $related->slug) }}" class="card-link">
+                                <div class="noticia-card">
+                                    <img src="{{ asset('storage/'.$related->image) }}" alt="{{ $related->title }}" class="card-img-top">
+                                    <div class="noticia-overlay">
+                                        <div class="categoria">{{ $related->category->name }}</div>
+                                        <div class="titulo">
+                                            {{ $related->title }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        @endforeach
+                    </div>
+                    @endif
+                </div>
+
+            </div>
+
+            <!-- Barra lateral con noticias aleatorias -->
+            <!-- Columna lateral para noticias aleatorias (4 columnas) -->
+            <div class="col-lg-4">
+                <div class="sticky-top" style="top: 20px;">
+                    <div class="sidebar-card">
+                        <div class="card-header">
+                            Te puede interesar
+                        </div>
+                        <div class="card-body">
+                            @foreach($randomNews as $news)
+                            <div class="sidebar-news-item">
+                                <a href="{{ route('news.show', $news->slug) }}" class="news-link"></a>
+                                <div class="news-content">
+                                    <h6>
+                                        {{ $news->title }}
+                                        @if($news->publish_date->gt(now()->subDays(3)))
+                                        @endif
+                                    </h6>
+                                    <p class="news-meta">
+                                        <i class="far fa-calendar-alt"></i>
+                                        {{ $news->publish_date->format('d M Y') }}
+                                    </p>
+                                    @if($news->image)
+                                    <img src="{{ asset('storage/'.$news->image) }}" class="sidebar-news-image" alt="{{ $news->title }}">
+                                    @endif
+                                </div>
+                            </div>
+                            @endforeach
                         </div>
                     </div>
-                @endforeach
+                </div>
             </div>
         </div>
     </div>
-</div>
-  </div>
-</div>
 
+    @include('layouts.partials.footer')
 
-@include('layouts.partials.footer')
-
-
+    <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

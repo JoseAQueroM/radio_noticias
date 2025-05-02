@@ -14,15 +14,24 @@ class NewsController extends Controller
                         ->with('category', 'author')
                         ->firstOrFail();
                         
-        // Obtener 4 noticias aleatorias (excluyendo la actual)
+        // Noticias relacionadas (misma categoría)
+        $relatedNews = News::where('status', 'published')
+                         ->where('category_id', $newsItem->category_id)
+                         ->where('id', '!=', $newsItem->id)
+                         ->orderBy('publish_date', 'desc')
+                         ->limit(3)
+                         ->get();
+    
+        // Noticias aleatorias (para otras secciones)
         $randomNews = News::where('status', 'published')
                          ->where('id', '!=', $newsItem->id)
                          ->inRandomOrder()
-                         ->limit(4)
+                         ->limit(3)
                          ->get();
-
+    
         return view('news.show', [
             'newsItem' => $newsItem,
+            'relatedNews' => $relatedNews,
             'randomNews' => $randomNews
         ]);
     }
