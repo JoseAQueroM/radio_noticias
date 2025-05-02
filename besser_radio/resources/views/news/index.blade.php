@@ -91,42 +91,8 @@
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <h2 class="footer-logo">Besser</h2>
-                    <p class="footer-description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    </p>
-                </div>
+    @include('layouts.partials.footer')
 
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="footer-title">Features</h4>
-                    <ul class="footer-list">
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Custom Widgets</a></li>
-                        <li><a href="#">Shortcodes</a></li>
-                        <li><a href="#">Blank Page</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="footer-title">Redes sociales</h4>
-                    <div class="social-icons">
-                        <a href="#"><i class="bi bi-facebook"></i></a>
-                        <a href="#"><i class="bi bi-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>Besser Solutions · Copyright 2025 · Todos los derechos reservados</p>
-                <a href="#">Política de privacidad</a>
-                <a href="#">Términos y condiciones</a>
-            </div>
-        </div>
-    </footer>
 
     <script src="{{ asset('assets/js/script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

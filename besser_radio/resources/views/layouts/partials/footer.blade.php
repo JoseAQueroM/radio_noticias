@@ -11,12 +11,11 @@
 
             <!-- Tercera columna (Características) -->
             <div class="col-lg-3 col-md-6">
-                <h4 class="footer-title">Features</h4>
+                <h4 class="footer-title">Navegación</h4>
                 <ul class="footer-list">
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Custom Widgets</a></li>
-                    <li><a href="#">Shortcodes</a></li>
-                    <li><a href="#">Blank Page</a></li>
+                    <li><a href="{{ route('home') }}">Inicio</a></li>
+                    <li><a href="{{ route('news.index') }}">Noticias</a></li>
+                    <li><a href="{{ route('categories.index') }}">Categorías</a></li>
                 </ul>
             </div>
 

@@ -19,3 +19,5 @@ Route::get('/categorias', [CategoryController::class, 'index'])->name('categorie
 
 // Ruta para mostrar todas las noticias de una categoría
 Route::get('/categorias/{slug}', [CategoryController::class, 'show'])->name('categories.show');
+
+

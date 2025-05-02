@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use Illuminate\Http\Request;
+use App\Models\Post;
 use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
@@ -33,11 +34,14 @@ class HomeController extends Controller
             ->orderBy('publish_date', 'desc')
             ->paginate(10); // Ajusta el número de noticias por página si es necesario
 
+        $post = Post::first();
+
         return View::make('home', [
             'leftNews' => $leftNews,
             'rightNews' => $rightNews,
             'newsChunks' => $newsChunks,
             'news' => $paginatedNews,
+            'post' => $post,
         ]);
     }
 }

@@ -374,7 +374,7 @@ body {
 /* Botón */
 .footer-btn {
     display: inline-block;
-    background-color: #57c68a;
+    background-color: var(--secundary-color);
     color: #fff;
     padding: 12px 18px;
     font-size: 16px;
@@ -384,7 +384,7 @@ body {
 }
 
 .footer-btn:hover {
-    background-color: #45a169;
+    background-color: var(--secundary-color);
 }
 
 /* Títulos */
@@ -412,7 +412,7 @@ body {
 }
 
 .footer-list a:hover {
-    color: #57c68a;
+    color: var(--secundary-color);
 }
 
 /* Redes sociales */
@@ -435,7 +435,7 @@ body {
 }
 
 .social-icons a:hover {
-    color: #57c68a;
+    color: var(--secundary-color);
 }
 
 /* Línea de copyright */
@@ -454,7 +454,7 @@ body {
 }
 
 .footer-bottom a:hover {
-    color: #57c68a;
+    color: var(--secundary-color);
 }
 
 .categoria-card {
