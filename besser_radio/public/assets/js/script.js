@@ -1,24 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const themeToggle = document.getElementById('themeToggle');
-    const body = document.body;
+    const playButton = document.getElementById('play-radio-button');
+    const audioElement = document.getElementById('radio-audio');
+    let isPlaying = false;
 
-    // Verificar preferencia del usuario
-    if (localStorage.getItem('theme') === 'dark') {
-        body.classList.add('dark-mode');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    }
+    playButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Evita que el enlace "#" recargue la página
 
-    // Alternar tema
-    themeToggle.addEventListener('click', function() {
-        body.classList.toggle('dark-mode');
-        const isDark = body.classList.contains('dark-mode');
-        
-        if (isDark) {
-            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            localStorage.setItem('theme', 'dark');
+        if (isPlaying) {
+            audioElement.pause();
+            isPlaying = false;
+            // Aquí puedes cambiar el icono del botón a "play" si lo deseas
+            playButton.innerHTML = '<i class="bi bi-play-fill ms-1"></i>';
         } else {
-            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-            localStorage.setItem('theme', 'light');
+            audioElement.play();
+            isPlaying = true;
+            // Aquí puedes cambiar el icono del botón a "pause" si lo deseas
+            playButton.innerHTML = '<i class="bi bi-pause-fill ms-1"></i>';
         }
     });
 });

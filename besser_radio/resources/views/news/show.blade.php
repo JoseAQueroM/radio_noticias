@@ -84,7 +84,6 @@
 
             </div>
 
-            <!-- Barra lateral con noticias aleatorias -->
             <!-- Columna lateral para noticias aleatorias (4 columnas) -->
             <div class="col-lg-4">
                 <div class="sticky-top" style="top: 20px;">

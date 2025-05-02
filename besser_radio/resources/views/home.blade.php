@@ -26,7 +26,8 @@
                     <p class="lead">
                     {{ $post->subtitle_home }}
                     </p>
-                    <a href="#" class="btn play-button">
+                    <audio id="radio-audio" src="#" preload="auto"></audio>
+                    <a href="#" class="btn play-button" id="play-radio-button">
                         <i class="bi bi-play-fill ms-1"></i>
                     </a>
                 </div>
@@ -81,7 +82,6 @@
     </div>
 </section>
 
-    <!-- Redes sociales (Fondo completo y centrado) -->
     <div class="container-fluid my-5 social-section">
         <h2 class="fw-bold text-center mb-4 title-social">Síguenos en nuestras redes:</h2>
         <div class="d-flex justify-content-center align-items-center flex-wrap gap-4">

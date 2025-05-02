@@ -31,7 +31,7 @@
     <!-- Contenido principal - UN SOLO contenedor principal -->
     <main class="flex-grow-1">
         <div class="container mt-5 pt-5">
-            <!-- Encabezado mejorado -->
+        
             <div class="text-center mb-5">
                 <h1 class="fw-bold display-4 mb-3">Explora Nuestras Categorías</h1>
                 <p class="lead text-muted">Descubre noticias organizadas por temas de tu interés</p>
@@ -70,7 +70,6 @@
         </div>
     </main>
 
-    <!-- Footer - ahora se pegará abajo correctamente -->
     @include('layouts.partials.footer')
 
     <script src="{{ asset('assets/js/script.js') }}"></script>
