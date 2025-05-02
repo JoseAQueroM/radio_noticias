@@ -64,6 +64,14 @@ body {
 
 }
 
+.image-sobrenosotros {
+    height: 50vh;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.75) 100%, transparent),
+        url('../img/aboutme.jpeg') no-repeat center center;
+    background-size: cover;
+
+}
+
 .nav-link {
     color: #fff !important;
 }
