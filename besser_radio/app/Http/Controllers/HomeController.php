@@ -22,6 +22,12 @@ class HomeController extends Controller
             ->take(3)
             ->get();
 
+         // Obtener 3 noticias aleatorias para el carrusel principal
+         $randomCarouselNews = News::where('status', 'published')
+         ->inRandomOrder()
+         ->take(3)
+         ->get();
+
         // Obtener las últimas noticias publicadas para el carousel
         $latestNews = News::where('status', 'published')
             ->orderBy('publish_date', 'desc')
@@ -39,6 +45,7 @@ class HomeController extends Controller
         return View::make('home', [
             'leftNews' => $leftNews,
             'rightNews' => $rightNews,
+            'randomCarouselNews' => $randomCarouselNews, 
             'newsChunks' => $newsChunks,
             'news' => $paginatedNews,
             'post' => $post,

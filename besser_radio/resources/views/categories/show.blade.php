@@ -11,36 +11,26 @@
     <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
 </head>
 
+
+
 <body>
 
-    @include('layouts.partials.header')
+    @include('layouts.partials.header2')
 
-    <!-- Seccion principal -->
-    <section class="image-categorias d-flex align-items-center text-white">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-12 text-start">
-                    <p class="text-uppercase small"></p>
-                    <h1 class="fw-bold text-center">{{ $category->name }}</h1>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Noticias destacadas de la categoría -->
     <div class="container mt-4">
         <div class="row">
             <!-- Noticia principal (la más reciente) -->
-            <div class="col-md-8">
+            <div class="col-12 col-md-8">
                 @if($categoryNews->count() > 0)
                 @php $mainNews = $categoryNews->shift(); @endphp
-                <div class="noticia-principal">
+                <div class="noticia-principal mb-2">
                     <a href="{{ route('news.show', $mainNews->slug) }}" class="text-decoration-none text-dark">
                         @if($mainNews->image)
-                        <img src="{{ asset('storage/'.$mainNews->image) }}" alt="{{ $mainNews->title }}" class="w-100">
+                        <img src="{{ asset('storage/'.$mainNews->image) }}" alt="{{ $mainNews->title }}" class="w-100 h-100">
                         @else
-                        <img src="https://via.placeholder.com/800x450?text=Noticia+Destacada" alt="Noticia destacada" class="w-100">
+                        <img src="https://via.placeholder.com/800x450?text=Noticia+Destacada" alt="Noticia destacada" class="w-100 h-100">
                         @endif
                         <div class="contenido">
                             <h5>{{ $mainNews->title }}</h5>
@@ -56,7 +46,7 @@
             </div>
 
             <!-- Noticias secundarias (siguientes 2 noticias) -->
-            <div class="col-md-4 d-flex flex-column gap-2">
+            <div class="col-12 col-md-4 d-flex flex-column gap-2">
                 @foreach($categoryNews->take(2) as $news)
                 <div class="noticia-secundaria">
                     <a href="{{ route('news.show', $news->slug) }}" class="text-decoration-none text-dark">
@@ -80,11 +70,11 @@
     </div>
 
     <!-- Noticias de la categoría (resto de las noticias) -->
-    <div class="container news-container">
+    <div class="container news-container mt-3">
         <div class="category-header">
-            <h1>{{ $category->name }}</h1>
+            <h1 class="section-title">{{ $category->name }}</h1>
             @if($category->description)
-            <p class="lead">{{ $category->description }}</p>
+            <p class="lead mt-3">{{ $category->description }}</p>
             @endif
         </div>
 
@@ -93,20 +83,23 @@
             <div class="col-lg-8">
                 @forelse($categoryNews as $news)
                 <div class="main-news-card">
-                    <a href="{{ route('news.show', $news->slug) }}" class="news-link"></a>
                     <div class="card-content">
                         <div class="row g-0">
                             <!-- Columna para la imagen -->
                             <div class="col-md-4 news-image-container">
                                 @if($news->image)
-                                <img src="{{ asset('storage/'.$news->image) }}" class="news-image" alt="{{ $news->title }}">
+                                <a href="{{ route('news.show', $news->slug) }}">
+                                    <img src="{{ asset('storage/'.$news->image) }}" class="news-image" alt="{{ $news->title }}">
+                                </a>
                                 @endif
                             </div>
 
                             <!-- Columna para el contenido -->
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ $news->title }}</h5>
+                                    <a href="{{ route('news.show', $news->slug) }}" class="text-decoration-none">
+                                        <h5 class="card-title">{{ $news->title }}</h5>
+                                    </a>
                                     <p class="news-meta">
                                         <i class="far fa-calendar-alt"></i>
                                         {{ $news->publish_date->format('d M Y') }}
@@ -129,32 +122,34 @@
                 <div class="sticky-top" style="top: 20px;">
                     <div class="sidebar-card">
                         <div class="card-header">
-                            Te puede interesar
+                            <h3 class="section-title">Te puede interesar</h3>
                         </div>
                         <div class="card-body">
                             @foreach($randomCategoryNews as $randomNews)
-                            <div class="sidebar-news-item">
-                                <a href="{{ route('news.show', $randomNews->slug) }}" class="news-link"></a>
-                                <div class="news-content">
-                                    <h6>
-                                        {{ $randomNews->title }}
-                                        @if($randomNews->publish_date->gt(now()->subDays(3)))
+                            <a href="{{ route('news.show', $randomNews->slug) }}" class="text-decoration-none news-link">
+                                <div class="sidebar-news-item">
+                                    <div class="news-content">
+                                        <h6 class="hover-primary">
+                                            {{ $randomNews->title }}
+                                            @if($randomNews->publish_date->gt(now()->subDays(3)))
+                                            @endif
+                                        </h6>
+                                        <p class="news-meta">
+                                            <i class="far fa-calendar-alt"></i>
+                                            {{ $randomNews->publish_date->format('d M Y') }}
+                                        </p>
+                                        @if($randomNews->image)
+                                        <img src="{{ asset('storage/'.$randomNews->image) }}" class="sidebar-news-image" alt="{{ $randomNews->title }}">
                                         @endif
-                                    </h6>
-                                    <p class="news-meta">
-                                        <i class="far fa-calendar-alt"></i>
-                                        {{ $randomNews->publish_date->format('d M Y') }}
-                                    </p>
-                                    @if($randomNews->image)
-                                    <img src="{{ asset('storage/'.$randomNews->image) }}" class="sidebar-news-image" alt="{{ $randomNews->title }}">
-                                    @endif
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                             @endforeach
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 

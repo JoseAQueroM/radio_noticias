@@ -13,20 +13,7 @@
 
 <body>
     
-@include('layouts.partials.header')
-
-<!-- Seccion principal -->
-<section class="image-sobrenosotros d-flex align-items-center text-white">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-12 text-start">
-                    <p class="text-uppercase small"></p>
-                    <h1 class="fw-bold text-center">Sobre nosotros</h1>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+@include('layouts.partials.header2')
 
 <div class="container py-5">
     <div class="row">

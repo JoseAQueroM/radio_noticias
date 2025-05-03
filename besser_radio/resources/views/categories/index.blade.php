@@ -13,20 +13,7 @@
 
 <body class="d-flex flex-column min-vh-100">
 
-    @include('layouts.partials.header')
-
-    <!-- Seccion principal -->
-    <section class="image-categorias d-flex align-items-center text-white">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-12 text-start">
-                    <p class="text-uppercase small"></p>
-                    <h1 class="fw-bold text-center">Categorías</h1>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('layouts.partials.header2')
 
     <!-- Contenido principal - UN SOLO contenedor principal -->
     <main class="flex-grow-1">
@@ -35,7 +22,7 @@
             <div class="text-center mb-5">
                 <h1 class="fw-bold display-4 mb-3">Explora Nuestras Categorías</h1>
                 <p class="lead text-muted">Descubre noticias organizadas por temas de tu interés</p>
-                <div class="divider mx-auto" style="width: 100px; height: 4px; background: linear-gradient(to right, #0b1e67, #1e88e5);"></div>
+                <div class="divider mx-auto" style="width: 100px; height: 4px; background: linear-gradient(to top, #d4f4dc 100%, transparent 100%);"></div>
             </div>
 
             <!-- Grid de categorías -->

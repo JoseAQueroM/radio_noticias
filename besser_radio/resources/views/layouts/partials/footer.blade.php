@@ -1,6 +1,6 @@
 
-<footer class="footer">
-    <div class="container">
+<footer class="footer mt-3 border-green">
+    <div class="container" >
         <div class="row">
             <!-- Primera columna (Logo y descripción) -->
             <div class="col-lg-3 col-md-6">

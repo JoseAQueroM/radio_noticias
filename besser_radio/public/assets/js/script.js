@@ -30,3 +30,19 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 });
 
+
+document.addEventListener("DOMContentLoaded", function() {
+    const navbar = document.getElementById("mainNavbar");
+    const header = document.querySelector(".custom-header");
+
+    window.addEventListener("scroll", function() {
+        if (window.scrollY > 50) { // Si el scroll supera 50px
+            navbar.classList.add("scrolled");
+            header.style.height = "80px"; // Reduce el espacio del header
+        } else {
+            navbar.classList.remove("scrolled");
+            header.style.height = "120px"; // Vuelve a la altura original
+        }
+    });
+});
+

@@ -16,21 +16,7 @@
 <body>
 
 
-    @include('layouts.partials.header')
-
-
-    <!-- Seccion principal -->
-    <section class="image-noticias d-flex align-items-center text-white">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-12 text-start">
-                    <p class="text-uppercase small"></p>
-                    <h1 class="fw-bold text-center">Noticias</h1>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('layouts.partials.header2')
 
     <div class="container mt-4 mb-5">
         <div class="row">
@@ -56,13 +42,13 @@
                 @endif
 
                 <div class="news-content mt-3">
-                    {!! $newsItem->content !!}
+                {!! nl2br(e($newsItem->content)) !!}
                 </div>
 
                 <div class="container my-4">
                     @if($relatedNews->count() > 0)
-                    <h3 class="mb-4" style="border-bottom: 4px solid #0b1e67; display: inline-block;">Noticias relacionadas</h3>
-                    <div class="row g-3">
+                    <h3 class="mb-4 section-title">Noticias relacionadas</h3>
+                    <div class="row g-3 mt-1">
                         @foreach($relatedNews as $related)
                         <div class="col-md-4">
                             <a href="{{ route('news.show', $related->slug) }}" class="card-link">
@@ -89,27 +75,28 @@
                 <div class="sticky-top" style="top: 20px;">
                     <div class="sidebar-card">
                         <div class="card-header">
-                            Te puede interesar
+                            <h2 class="section-title">Te puede interesar</h2>
                         </div>
                         <div class="card-body">
                             @foreach($randomNews as $news)
-                            <div class="sidebar-news-item">
-                                <a href="{{ route('news.show', $news->slug) }}" class="news-link"></a>
-                                <div class="news-content">
-                                    <h6>
-                                        {{ $news->title }}
-                                        @if($news->publish_date->gt(now()->subDays(3)))
+                            <a href="{{ route('news.show', $news->slug) }}" class="text-decoration-none news-link">
+                                <div class="sidebar-news-item">
+                                    <div class="news-content">
+                                        <h6 class="hover-primary">
+                                            {{ $news->title }}
+                                            @if($news->publish_date->gt(now()->subDays(3)))
+                                            @endif
+                                        </h6>
+                                        <p class="news-meta">
+                                            <i class="far fa-calendar-alt"></i>
+                                            {{ $news->publish_date->format('d M Y') }}
+                                        </p>
+                                        @if($news->image)
+                                        <img src="{{ asset('storage/'.$news->image) }}" class="sidebar-news-image" alt="{{ $news->title }}">
                                         @endif
-                                    </h6>
-                                    <p class="news-meta">
-                                        <i class="far fa-calendar-alt"></i>
-                                        {{ $news->publish_date->format('d M Y') }}
-                                    </p>
-                                    @if($news->image)
-                                    <img src="{{ asset('storage/'.$news->image) }}" class="sidebar-news-image" alt="{{ $news->title }}">
-                                    @endif
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                             @endforeach
                         </div>
                     </div>
