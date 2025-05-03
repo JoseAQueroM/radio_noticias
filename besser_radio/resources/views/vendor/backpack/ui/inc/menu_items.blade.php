@@ -5,6 +5,5 @@
 <x-backpack::menu-item title="Users" icon="la la-question" :link="backpack_url('user')" />
 <x-backpack::menu-item title="Categories" icon="la la-question" :link="backpack_url('category')" />
 <x-backpack::menu-item title="News" icon="la la-question" :link="backpack_url('news')" />
-<x-backpack::menu-item title="CustomTexts" icon="la la-font" :link="backpack_url('customTexts')" />
 
 

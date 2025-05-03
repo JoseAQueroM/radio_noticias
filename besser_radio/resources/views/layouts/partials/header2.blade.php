@@ -1,7 +1,9 @@
-<head>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
-</head>
+@php
+    $post = App\Models\Post::first();
+    $logo = $post?->title_logo ? asset('storage/' . $post->title_logo) : null;
+    $title = $post?->title_home;
+    $categories = App\Models\Category::orderBy('name')->get(); // Obtenemos todas las categorías ordenadas
+@endphp
 
 <style>
     * {
@@ -12,25 +14,18 @@
     }
 
     body {
-        padding-top: 45px;
-        /* Evita que el contenido quede detrás del navbar */
-    }
-
-    .container {
-        max-width: 1280px;
-        margin: auto;
-        padding: 0 20px;
+        padding-top: 90px;
     }
 
     .main-head {
         width: 100%;
-        height: 54px;
+        height: 90px;
         position: fixed;
         top: 0;
         left: 0;
         background: #293036;
         z-index: 9999;
-        transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
     }
 
     .main-head.slidedown {
@@ -38,114 +33,228 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .main-menu {
+    .navbar {
+        height: 100%;
+        padding: 0 20px;
+    }
+
+    .navbar-brand {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        height: 54px;
+        position: absolute;
+        left: 100px;
     }
 
-    .logo {
-        font-family: 'Work Sans', sans-serif;
-        font-size: 40px;
-        font-weight: 600;
-        color: #fff;
-    }
-
-    .nav-menu .nav-list {
+    .logo-container {
         display: flex;
-        list-style-type: none;
-        /* Elimina los puntos negros */
-        padding: 0;
-        margin: 0;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-container img {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+
+    .title-home {
+        color: #fff;
+        transition: color 0.3s ease;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .main-head.slidedown .title-home {
+        color: #000;
     }
 
     .nav-link {
         text-decoration: none;
-        color: #fff;
+        color: #fff !important;
         font-family: 'Montserrat', sans-serif;
         font-size: 15px;
         transition: color 0.3s ease;
-    }
-
-    .nav-link:hover {
-        color: #B53471;
-    }
-
-    .main-head.slidedown .nav-link,
-    .main-head.slidedown .logo {
-        color: #000;
+        font-weight: bold;
+        padding: 0.5rem 1rem !important;
     }
 
     .main-head.slidedown .nav-link {
         color: #000 !important;
     }
 
-    .toggle-btn {
-        display: flex;
-        align-items: center;
-        /* Centra el botón de menú */
+    .navbar-toggler {
+        border: 1px solid #fff;
+        background-color: transparent;
+        position: absolute;
+        right: 20px;
+    }
+
+    .main-head.slidedown .navbar-toggler {
+        border: 1px solid #293036;
+    }
+
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        transition: all 0.3s ease;
+    }
+
+    .main-head.slidedown .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    #navbarNav {
+        justify-content: center;
+    }
+
+    /* Estilos para el dropdown de categorías */
+    .dropdown-menu {
+        background-color: #293036;
+        border: none;
+        border-radius: 0;
+    }
+    
+    .main-head.slidedown .dropdown-menu {
+        background-color: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .dropdown-item {
+        color: #fff !important;
+        padding: 0.5rem 1.5rem;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    
+    .main-head.slidedown .dropdown-item {
+        color: #000 !important;
+    }
+    
+    .dropdown-item:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
+    
+    .main-head.slidedown .dropdown-item:hover {
+        background-color: rgba(0,0,0,0.05);
+    }
+    
+    .dropdown-toggle::after {
+        display: inline-block;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: "";
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent;
+        color: #fff;
+        transition: all 0.3s ease;
+    }
+    
+    .main-head.slidedown .dropdown-toggle::after {
+        color: #000;
+    }
+
+    @media (max-width: 991.98px) {
+        .navbar-brand {
+            position: static;
+            margin-left: 20px;
+        }
+        
+        .navbar-toggler {
+            position: static;
+        }
+        
+        .navbar-collapse {
+            background-color: #293036;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .main-head.slidedown .navbar-collapse {
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-item {
+            margin: 10px 0;
+        }
+        
+        #navbarNav {
+            justify-content: flex-start;
+        }
+
+        /* Estilos responsive para el dropdown */
+        .dropdown-menu {
+            background-color: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+            padding-left: 20px;
+        }
+        
+        .dropdown-item {
+            padding-left: 0;
+        }
     }
 </style>
-</head>
 
-<body>
-    <header class="main-head">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <nav class="navbar">
-                    <div class="container">
-                        <a class="navbar-brand" href="#">
-                        <img src="{{ asset('assets/img/logo.svg') }}" width="30" height="24" alt="Logo">                        </a>
-                    </div>
-                </nav>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link fw-bold" href="{{ route('home') }}">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fw-bold" href="{{ route('news.index') }}">Noticias</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fw-bold" href="{{ route('categories.index') }}">Categorías</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fw-bold" href="{{ route('about') }}">Sobre nosotros</a>
-                        </li>
-                    </ul>
+<header class="main-head">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <div class="logo-container">
+                    @if ($logo)
+                        <img src="{{ $logo }}" alt="Logo">
+                    @endif
+
+                    @if ($title)
+                        <span class="title-home">{{ $title }}</span>
+                    @endif
+
+                    @if (!$logo && !$title)
+                        <span class="title-home">Título por defecto</span>
+                    @endif
                 </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home') }}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('news.index') }}">Noticias</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categorías
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @foreach($categories as $category)
+                                <li><a class="dropdown-item" href="{{ route('categories.show', $category->slug) }}">{{ $category->name }}</a></li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('about') }}">Sobre nosotros</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+</header>
 
-    <script>
-        const mainMenu = document.querySelector('.main-head');
+<script>
+    const mainMenu = document.querySelector('.main-head');
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                mainMenu.classList.add("slidedown");
-            } else {
-                mainMenu.classList.remove("slidedown");
-            }
-        });
-
-
-        if (scrollY < 50) {
-            navbar.style.opacity = '1';
-        } else if (scrollY > 200 && scrollY > lastScrollY) {
-            navbar.style.opacity = '0';
-            navbar.style.pointerEvents = 'none';
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            mainMenu.classList.add("slidedown");
         } else {
-            navbar.style.opacity = '1';
-            navbar.style.pointerEvents = 'auto';
+            mainMenu.classList.remove("slidedown");
         }
-        lastScrollY = scrollY;
-    </script>
-
-</body>
-
-</html>
+    });
+</script>
