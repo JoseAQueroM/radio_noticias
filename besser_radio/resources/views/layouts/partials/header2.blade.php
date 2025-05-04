@@ -1,8 +1,8 @@
 @php
-    $post = App\Models\Post::first();
-    $logo = $post?->title_logo ? asset('storage/' . $post->title_logo) : null;
-    $title = $post?->title_home;
-    $categories = App\Models\Category::orderBy('name')->get(); // Obtenemos todas las categorías ordenadas
+$post = App\Models\Post::first();
+$logo = $post?->title_logo ? asset('storage/' . $post->title_logo) : null;
+$title = $post?->title_home;
+$categories = App\Models\Category::orderBy('name')->get();
 @endphp
 
 <style>
@@ -42,7 +42,7 @@
         display: flex;
         align-items: center;
         position: absolute;
-        left: 100px;
+
     }
 
     .logo-container {
@@ -106,42 +106,50 @@
         justify-content: center;
     }
 
-    /* Estilos para el dropdown de categorías */
+    /* Estilos del dropdown */
     .dropdown-menu {
         background-color: #293036;
         border: none;
         border-radius: 0;
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        transform: translateY(10px);
     }
-    
+
     .main-head.slidedown .dropdown-menu {
         background-color: #fff;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
-    
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
     .dropdown-item {
         color: #fff !important;
         padding: 0.5rem 1.5rem;
         font-weight: bold;
         font-size: 14px;
     }
-    
+
     .main-head.slidedown .dropdown-item {
         color: #000 !important;
     }
-    
+
     .dropdown-item:hover {
-        background-color: rgba(255,255,255,0.1);
+        background-color: rgba(255, 255, 255, 0.1);
     }
-    
+
     .main-head.slidedown .dropdown-item:hover {
-        background-color: rgba(0,0,0,0.05);
+        background-color: rgba(0, 0, 0, 0.05);
     }
-    
+
     .dropdown-toggle::after {
-        display: inline-block;
-        margin-left: 0.255em;
-        vertical-align: 0.255em;
-        content: "";
         border-top: 0.3em solid;
         border-right: 0.3em solid transparent;
         border-bottom: 0;
@@ -149,7 +157,7 @@
         color: #fff;
         transition: all 0.3s ease;
     }
-    
+
     .main-head.slidedown .dropdown-toggle::after {
         color: #000;
     }
@@ -157,42 +165,60 @@
     @media (max-width: 991.98px) {
         .navbar-brand {
             position: static;
-            margin-left: 20px;
         }
-        
+
         .navbar-toggler {
             position: static;
         }
-        
-        .navbar-collapse {
-            background-color: #293036;
-            padding: 15px;
-            margin-top: 10px;
-            border-radius: 5px;
-            text-align: center;
+        .navbar-toggler:focus,
+        .navbar-toggler:active {
+            outline: none;
+            box-shadow: none;
         }
-        
+
+        .navbar-collapse {
+            position: absolute;
+            top: 90px;
+            left: 0;
+            width: 100%;
+            background: #293036;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            text-align: center;
+            overflow: hidden;
+            transition: height 0.3s ease;
+        }
+
+        .navbar-collapse.show {
+            height: auto;
+        }
+
         .main-head.slidedown .navbar-collapse {
             background-color: #fff;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
-        
+
         .nav-item {
             margin: 10px 0;
         }
-        
+
         #navbarNav {
             justify-content: flex-start;
         }
 
-        /* Estilos responsive para el dropdown */
         .dropdown-menu {
+            display: none !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: none !important;
             background-color: transparent !important;
             box-shadow: none !important;
-            border: none !important;
             padding-left: 20px;
         }
-        
+
+        .dropdown.show .dropdown-menu {
+            display: block !important;
+        }
+
         .dropdown-item {
             padding-left: 0;
         }
@@ -205,15 +231,15 @@
             <a class="navbar-brand" href="#">
                 <div class="logo-container">
                     @if ($logo)
-                        <img src="{{ $logo }}" alt="Logo">
+                    <img src="{{ $logo }}" alt="Logo">
                     @endif
 
                     @if ($title)
-                        <span class="title-home">{{ $title }}</span>
+                    <span class="title-home">{{ $title }}</span>
                     @endif
 
                     @if (!$logo && !$title)
-                        <span class="title-home">Título por defecto</span>
+                    <span class="title-home">Título por defecto</span>
                     @endif
                 </div>
             </a>
@@ -234,7 +260,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @foreach($categories as $category)
-                                <li><a class="dropdown-item" href="{{ route('categories.show', $category->slug) }}">{{ $category->name }}</a></li>
+                            <li><a class="dropdown-item" href="{{ route('categories.show', $category->slug) }}">{{ $category->name }}</a></li>
                             @endforeach
                         </ul>
                     </li>
@@ -248,13 +274,33 @@
 </header>
 
 <script>
+    // Animación del navbar al hacer scroll
     const mainMenu = document.querySelector('.main-head');
-
     window.addEventListener('scroll', () => {
         if (window.scrollY > 100) {
             mainMenu.classList.add("slidedown");
         } else {
             mainMenu.classList.remove("slidedown");
+        }
+    });
+
+    // Control del dropdown en móvil
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 991.98) {
+                e.preventDefault();
+                const dropdown = this.closest('.dropdown');
+                dropdown.classList.toggle('show');
+            }
+        });
+    });
+
+    // Cerrar dropdown al hacer click fuera
+    document.addEventListener('click', function(e) {
+        if (!e.target.matches('.dropdown, .dropdown *')) {
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                dropdown.classList.remove('show');
+            });
         }
     });
 </script>
