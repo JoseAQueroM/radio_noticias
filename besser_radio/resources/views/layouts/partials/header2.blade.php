@@ -19,7 +19,7 @@ $categories = App\Models\Category::orderBy('name')->get();
 
     .main-head {
         width: 100%;
-        height: 90px;
+        height: 92px;
         position: fixed;
         top: 0;
         left: 0;
@@ -35,14 +35,13 @@ $categories = App\Models\Category::orderBy('name')->get();
 
     .navbar {
         height: 100%;
-        padding: 0 20px;
     }
 
     .navbar-brand {
         display: flex;
         align-items: center;
         position: absolute;
-
+        left: 60px;
     }
 
     .logo-container {
@@ -150,6 +149,10 @@ $categories = App\Models\Category::orderBy('name')->get();
     }
 
     .dropdown-toggle::after {
+        display: inline-block;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: "";
         border-top: 0.3em solid;
         border-right: 0.3em solid transparent;
         border-bottom: 0;
@@ -170,6 +173,7 @@ $categories = App\Models\Category::orderBy('name')->get();
         .navbar-toggler {
             position: static;
         }
+
         .navbar-toggler:focus,
         .navbar-toggler:active {
             outline: none;
@@ -182,10 +186,10 @@ $categories = App\Models\Category::orderBy('name')->get();
             left: 0;
             width: 100%;
             background: #293036;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            text-align: center;
-            overflow: hidden;
             transition: height 0.3s ease;
+            text-align: center;
+            height: 0;
+            overflow: hidden;
         }
 
         .navbar-collapse.show {
@@ -205,22 +209,26 @@ $categories = App\Models\Category::orderBy('name')->get();
             justify-content: flex-start;
         }
 
+        .navbar-nav {
+            justify-content: flex-start !important;
+            text-align: left;
+        }
+
         .dropdown-menu {
-            display: none !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-            transform: none !important;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
             background-color: transparent !important;
             box-shadow: none !important;
             padding-left: 20px;
+            padding-top: 0;
+            padding-bottom: 0;
         }
 
         .dropdown.show .dropdown-menu {
-            display: block !important;
-        }
-
-        .dropdown-item {
-            padding-left: 0;
+            max-height: 500px; 
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
     }
 </style>
@@ -247,7 +255,7 @@ $categories = App\Models\Category::orderBy('name')->get();
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
+                <ul class="navbar-nav mx-lg-auto me-0">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('home') }}">Inicio</a>
                     </li>

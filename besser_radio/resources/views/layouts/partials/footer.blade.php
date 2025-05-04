@@ -4,7 +4,7 @@
         <div class="row">
             <!-- Primera columna (Logo y descripción) -->
             <div class="col-lg-3 col-md-6">
-                <h2 class="footer-logo">{{ \App\Models\Post::first()->title_logo ?? 'Sin datos' }}</h2>
+                <h2 class="footer-logo">Besser</h2>
                 <p class="footer-description">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. 
             </div>
@@ -32,7 +32,7 @@
 
         <!-- Línea de copyright -->
         <div class="footer-bottom">
-            <p>{{ \App\Models\Post::first()->title_logo ?? 'Sin datos' }} · Copyright 2025 · Todos los derechos reservados</p>
+            <p>· Copyright 2025 · Todos los derechos reservados</p>
             <a href="#">Política de privacidad</a>
             <a href="#">Términos y condiciones</a>
         </div>
