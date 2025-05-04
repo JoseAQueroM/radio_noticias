@@ -1024,6 +1024,10 @@ body {
         align-items: flex-start;
     }
 
+    .othersNews-Container{
+        margin-top: 25px;
+    }
+
     .left-show img {
         width: 100%;
         /* Imagen toma todo el ancho */

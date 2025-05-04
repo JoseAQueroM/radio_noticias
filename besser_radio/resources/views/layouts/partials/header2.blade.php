@@ -165,6 +165,70 @@ $categories = App\Models\Category::orderBy('name')->get();
         color: #000;
     }
 
+          
+    .custom-toggler {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        z-index: 10000;
+    }
+
+    .toggle-text {
+        color: #fff;
+        font-weight: bold;
+        margin-right: 10px;
+        font-size: 1rem;
+    }
+
+    .main-head.slidedown .toggle-text {
+        color: #000;
+    }
+
+    .toggle-icon {
+        width: 22px;
+        height: 16px;
+        position: relative;
+    }
+
+    .toggle-icon::before,
+    .toggle-icon::after,
+    .toggle-icon span {
+        content: "";
+        position: absolute;
+        height: 2px;
+        background-color: #fff;
+        width: 100%;
+        left: 0;
+        transition: background-color 0.3s;
+    }
+
+    .toggle-icon::before {
+        top: 0;
+    }
+
+    .toggle-icon span {
+        top: 6px;
+    }
+
+    .toggle-icon::after {
+        top: 12px;
+    }
+
+    .main-head.slidedown .toggle-icon::before,
+    .main-head.slidedown .toggle-icon::after,
+    .main-head.slidedown .toggle-icon span {
+        background-color: #000;
+    }
+
+    @media (min-width: 992px) {
+        .custom-toggler {
+            display: none;
+        }
+    
+    }
+
     @media (max-width: 991.98px) {
         .navbar-brand {
             position: static;
@@ -231,69 +295,8 @@ $categories = App\Models\Category::orderBy('name')->get();
             padding-bottom: 10px;
         }
 
-        
-    .custom-toggler {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        position: absolute;
-        right: 20px;
-        z-index: 10000;
-    }
-
-    .toggle-text {
-        color: #fff;
-        font-weight: bold;
-        margin-right: 10px;
-        font-size: 1rem;
-    }
-
-    .main-head.slidedown .toggle-text {
-        color: #000;
-    }
-
-    .toggle-icon {
-        width: 22px;
-        height: 16px;
-        position: relative;
-    }
-
-    .toggle-icon::before,
-    .toggle-icon::after,
-    .toggle-icon span {
-        content: "";
-        position: absolute;
-        height: 3px;
-        background-color: #fff;
-        width: 100%;
-        left: 0;
-        transition: background-color 0.3s;
-    }
-
-    .toggle-icon::before {
-        top: 0;
-    }
-
-    .toggle-icon span {
-        top: 6px;
-    }
-
-    .toggle-icon::after {
-        top: 12px;
-    }
-
-    .main-head.slidedown .toggle-icon::before,
-    .main-head.slidedown .toggle-icon::after,
-    .main-head.slidedown .toggle-icon span {
-        background-color: #000;
-    }
-
-    @media (min-width: 992px) {
-        .custom-toggler {
-            display: none;
-        }
-    }
-    }
+  
+ }
 </style>
 
 <header class="main-head">
@@ -316,7 +319,7 @@ $categories = App\Models\Category::orderBy('name')->get();
             </a>
             <div class="custom-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="toggle-text">Menu</span>
-                <span class="toggle-icon"></span>
+                <span class="toggle-icon"></span>            
             </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-lg-auto me-0">
