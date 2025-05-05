@@ -13,23 +13,19 @@
 </head>
 
 <style>
-    /* SOLUCIÓN PARA EL ZOOM SIN PERDER BORDER-RADIUS */
     .zoom-image-container {
         display: block;
         overflow: hidden;
-        border-radius: 0.375rem !important; /* Mantiene las esquinas redondeadas */
+        border-radius: 0.375rem !important; 
     }
     .zoom-image {
         transition: transform 0.3s ease;
-        border-radius: inherit; /* Hereda el redondeo del contenedor */
+        border-radius: inherit; 
     }
     .zoom-image-container:hover .zoom-image {
         transform: scale(1.05);
     }
 
-
-    /* Añade esto al CSS existente */
-    
 </style>
 
 <body>
@@ -53,7 +49,6 @@
                 $firstInChunk = $chunk->first();
                 @endphp
                 <div class="left-show">
-                    <!-- Enlace para la imagen - Ahora con contenedor de tamaño fijo -->
                     <a href="{{ route('news.show', $firstInChunk->slug) }}" class="zoom-image-container text-decoration-none d-block" style="width: 100%; height: 220px; overflow: hidden;">
                         @if ($firstInChunk->image)
                         <img src="{{ asset('storage/' . $firstInChunk->image) }}" 
@@ -68,7 +63,6 @@
                         @endif
                     </a>
 
-                    <!-- Contenido de texto con enlace en títulos -->
                     <div class="left-info">
                         <a href="{{ route('news.show', $firstInChunk->slug) }}" class="text-decoration-none text-dark">
                             <div class="show-title-principal">{{ $firstInChunk->title }}</div>
@@ -86,7 +80,6 @@
                 @if ($chunk->count() > 1)
                 @foreach ($chunk->skip(1)->take(3) as $newsItem)
                 <div class="right-show-small mb-3">
-                    <!-- Enlace que cubre imagen + texto -->
                     <a href="{{ route('news.show', $newsItem->slug) }}" class="d-flex text-decoration-none text-dark zoom-image-container">
                         @if ($newsItem->image)
                         <img src="{{ asset('storage/' . $newsItem->image) }}" 

@@ -62,7 +62,7 @@ class Category extends Model
     {
         $attribute_name = "image";
         $disk = 'public';
-        $destination_path = 'categories'; // Coincide con el 'prefix' en CategoryCrudController
+        $destination_path = 'categories';
 
         if (is_file($value)) {
             if ($this->{$attribute_name}) {

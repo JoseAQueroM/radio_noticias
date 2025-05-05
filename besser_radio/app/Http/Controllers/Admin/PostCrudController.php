@@ -26,7 +26,7 @@ class PostCrudController extends CrudController
         CRUD::column('title_logo')
             ->label('Logo')
             ->type('image')
-            ->prefix('storage/') // Asegura que las imágenes se carguen correctamente
+            ->prefix('storage/') 
             ->height('50px')
             ->width('50px');
 
@@ -47,7 +47,7 @@ class PostCrudController extends CrudController
             ->withFiles([
                 'disk' => 'public',
                 'path' => 'uploads/posts/logos',
-                'prefix' => 'storage' // ¡Este es el ajuste clave que faltaba!
+                'prefix' => 'storage' 
             ])
             ->hint('Formatos: SVG, PNG, JPG (max 5MB)');
 

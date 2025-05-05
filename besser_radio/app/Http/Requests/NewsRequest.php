@@ -17,9 +17,9 @@ class NewsRequest extends FormRequest
         'title' => 'required|min:5|max:255',
         'content' => 'required|min:10',
         'category_id' => 'required|exists:categories,id',
-        'publish_date' => 'required|date',  // Cambiado de nullable a required
+        'publish_date' => 'required|date',  
         'status' => 'required|in:draft,published,archived',
-        'image' => 'required|image|max:2048',  // Si quieres que sea obligatorio
+        'image' => 'required|image|max:2048',  
     ];
 }
 }

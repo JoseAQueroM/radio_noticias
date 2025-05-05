@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <style>
-    /* Estilos principales */
     * {
         font-family: "PT Sans", sans-serif !important;
     }
@@ -30,7 +29,6 @@
         padding-right: 10rem !important;
     }
 
-    /* Efecto zoom para imágenes */
     .zoom-image-container {
         display: inline-block;
         overflow: hidden;
@@ -46,7 +44,6 @@
         transform: scale(1.08);
     }
 
-    /* Estilos específicos para la sección de noticias */
     .left-show {
         display: flex;
         gap: 1rem;
@@ -71,7 +68,6 @@
         margin-bottom: 15px;
     }
 
-    /* Estilos para el carrusel principal */
     #carouselExampleCaptions .carousel-item {
         height: 80vh;
         min-height: 400px;
@@ -150,7 +146,6 @@
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     }
 
-    /* Estilos para el carrusel de últimas noticias */
     #episodeCarousel .carousel-item {
         height: auto;
         min-height: auto;
@@ -192,7 +187,6 @@
         margin-top: 1px;
     }
 
-    /* Estilos para el reproductor de radio fijo */
     .radio-player-container {
         position: fixed;
         bottom: 0;
@@ -279,7 +273,6 @@
         font-size: 1.5rem;
     }
 
-    /* Estilos responsive */
     @media (max-width: 768px) {
         .page-wrapper {
             padding-left: 0 !important;
@@ -353,7 +346,6 @@
             justify-content: center;
         }
 
-        /* Reproductor responsive */
         .radio-player-container {
             padding: 10px 15px;
         }
@@ -544,7 +536,7 @@
                     </div>
                 </div>
 
-                <!-- Versión desktop -->
+                <!-- Versión para pc -->
                 <div class="d-none d-md-flex justify-content-center flex-wrap gap-4">
                     <a href="#" class="social-btn">
                         <i class="bi bi-instagram"></i>
@@ -656,7 +648,6 @@
                         return;
                     }
                     
-                    // Pausar todos los demás reproductores de audio
                     document.querySelectorAll('.audio-player').forEach(player => {
                         if (player !== audioPlayer) {
                             player.pause();

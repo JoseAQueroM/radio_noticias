@@ -86,25 +86,25 @@ body {
 
 
 #episodeCarousel .carousel-item {
-    padding: 10px 0; /* Reducido de 20px a 10px */
+    padding: 10px 0; 
 }
 
 #episodeCarousel .row.g-4 {
-    gap: 1rem; /* Reducido de 1.5rem (24px) a 1rem (16px) */
+    gap: 1rem; 
 }
 
 
 #episodeCarousel .carousel-item img {
-    height: 200px; /* Reducido de 250px */
+    height: 200px; 
 }
 
 #episodeCarousel .card-body {
-    padding: 1rem; /* Reducido del valor por defecto */
+    padding: 1rem; 
 }
 
 #episodeCarousel h6.fw-bold {
-    margin-bottom: 0.5rem; /* Reducido de 1rem */
-    font-size: 0.9rem; /* Tamaño de fuente ligeramente más pequeño */
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem; 
 }
 
 #carouselExampleCaptions .carousel-item {
@@ -131,13 +131,12 @@ body {
 
 #episodeCarousel .carousel-item {
     position: relative;
-    /* Sin height definido para que sea flexible */
     padding: 20px 0;
 }
 
 #episodeCarousel .carousel-item img {
     width: 100%;
-    height: 250px; /* Altura fija para las tarjetas */
+    height: 250px; 
     object-fit: cover;
 }
 
@@ -243,30 +242,24 @@ body {
 
 .navbar.navbar-dark {
     background-color: transparent;
-    /* Inicialmente sin fondo */
     transition: background-color 0.3s ease-in-out;
 }
 
 .navbar.navbar-dark.show-bg {
     background-color: var(--primary-color)
-        /* Fondo oscuro cuando está abierto */
 }
 
 .last-title {
     color: var(--primary-color);
 }
 
-/* Estilo para el título principal */
 .featured-title {
     font-size: 32px;
-    /* Tamaño grande */
     font-weight: bold;
     color: #000;
-    /* Color negro */
     margin-bottom: 10px;
 }
 
-/* Estilo para el enlace "VIEW ALL SHOWS" */
 .view-all {
     font-size: 14px;
     color: #777;
@@ -276,18 +269,14 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
-    /* Espaciado entre el texto y la flecha */
 }
 
 .view-all:hover {
     color: #000;
-    /* Hace que se oscurezca al pasar el cursor */
 }
 
-/* Flecha al lado del enlace */
 .view-all::after {
     content: "→";
-    /* Agregamos la flecha */
     font-size: 14px;
     font-weight: bold;
 }
@@ -298,11 +287,9 @@ body {
     background-size: cover;
     padding: 40px 0;
     width: 100%;
-    /* Ocupa todo el ancho */
     text-align: center;
 }
 
-/* Botones sociales */
 .social-btn {
     display: flex;
     flex-direction: column;
@@ -413,14 +400,11 @@ body {
 .left-info {
     display: flex;
     flex-direction: column;
-    /* Cambiamos "row" a "column" */
     align-items: flex-start;
     gap: 5px;
-    /* Espacio entre título y episodio */
     width: 100%;
 }
 
-/* Ajustamos los elementos dentro del texto */
 .show-title {
     font-size: 18px;
     font-weight: bold;
@@ -433,7 +417,7 @@ body {
 }
 
 .show-title-principal, .show-title, .episode-count, .episode-count-principal {
-    pointer-events: auto; /* Permite que los eventos del mouse funcionen en estos elementos */
+    pointer-events: auto; 
 }
 
 .episode-count {
@@ -466,7 +450,6 @@ body {
 }
 
 
-/* Estilos de la derecha */
 .right-show-small {
     display: flex;
     align-items: center;
@@ -488,38 +471,30 @@ body {
     text-align: left;
 }
 
-/* Línea separadora entre bloques de noticias */
 .news-block {
     border-bottom: 1px solid #ccc;
     padding-bottom: 20px;
     margin-bottom: 20px;
 }
 
-
-/*Footer*/
-
-/* Estilos generales del footer */
 .footer {
     background-color: #293036;
     color: #fff;
     padding: 60px 0;
 }
 
-/* Estilo del logo */
 .footer-logo {
     font-size: 30px;
     font-weight: bold;
     color: white;
 }
 
-/* Descripción */
 .footer-description {
     font-size: 14px;
     color: #bbb;
     margin-bottom: 20px;
 }
 
-/* Botón */
 .footer-btn {
     display: inline-block;
     background-color: var(--secundary-color);
@@ -535,14 +510,12 @@ body {
     background-color: var(--secundary-color);
 }
 
-/* Títulos */
 .footer-title {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
-/* Listas */
 .footer-list {
     list-style: none;
     padding: 0;
@@ -563,7 +536,6 @@ body {
     color: var(--secundary-color);
 }
 
-/* Redes sociales */
 
 .title-social {
     color: white;
@@ -573,7 +545,6 @@ body {
     display: flex;
     gap: 15px;
     margin-top: 10px;
-    /* Espacio entre el título y los iconos */
 }
 
 .social-icons a {
@@ -586,7 +557,6 @@ body {
     color: var(--secundary-color);
 }
 
-/* Línea de copyright */
 .footer-bottom {
     text-align: center;
     padding-top: 25px;
@@ -675,7 +645,6 @@ body {
     height: 145px;
 }
 
-/* Contenedor de imagen con overflow para el efecto zoom */
 .imagen-container {
     width: 100%;
     height: 100%;
@@ -689,7 +658,6 @@ body {
     transition: transform 0.5s ease;
 }
 
-/* Contenido de la noticia */
 .contenido {
     position: absolute;
     bottom: 0;
@@ -710,7 +678,6 @@ body {
     font-size: 14px;
 }
 
-/* Textos */
 .titulo-noticia {
     font-weight: 600;
     margin-bottom: 5px;
@@ -729,7 +696,6 @@ body {
     margin-bottom: 0;
 }
 
-/* Efectos hover */
 .noticia-link:hover {
     text-decoration: none;
 }
@@ -805,14 +771,14 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 10; /* Asegúrate de que sea mayor que otros elementos */
-    pointer-events: auto; /* Desactiva la interacción del enlace */
+    z-index: 10; 
+    pointer-events: auto; 
 }
 
 .main-news-card .card-content {
     position: relative;
     z-index: 2;
-    pointer-events: auto; /* Permite la interacción con el contenido */
+    pointer-events: auto; 
 }
 
 .main-news-card .news-image-container {
@@ -862,7 +828,6 @@ body {
     margin-bottom: 0;
 }
 
-/* Sidebar Styles */
 .sidebar-card {
     border: none;
     border-radius: 10px;
@@ -891,7 +856,7 @@ body {
     border-bottom: 1px solid #eee;
     transition: all 0.3s ease;
     position: relative;
-    overflow: hidden; /* Asegura que la imagen no se salga del contenedor */
+    overflow: hidden; 
 }
 
 .sidebar-news-item .news-content {
@@ -929,7 +894,7 @@ body {
 }
 
 .sidebar-news-item:hover .sidebar-news-image {
-    transform: scale(1.1); /* Aplica un zoom del 10% */
+    transform: scale(1.1); 
     transition: transform 0.3s ease;
 }
 
@@ -1016,10 +981,9 @@ body {
 
 @media (max-width: 992px) {
 
-    /* Ajuste para tablets y móviles */
+   
     .left-show {
         flex-direction: column;
-        /* En móviles, imagen arriba y texto abajo */
         align-items: flex-start;
     }
 
@@ -1029,7 +993,6 @@ body {
 
     .left-show img {
         width: 100%;
-        /* Imagen toma todo el ancho */
     }
 
     .right-show-small {
@@ -1043,7 +1006,6 @@ body {
 
     .social-section {
         padding: 20px 0;
-        /* Menos espacio en móvil */
     }
 
     .social-btn {
@@ -1054,7 +1016,6 @@ body {
 
     .social-btn i {
         font-size: 28px;
-        /* Ícono más pequeño en móvil */
     }
 
     .show-title-principal {
@@ -1067,7 +1028,6 @@ body {
 
     .episode-count-principal {
         font-size: 18px;
-        /* Tamaño más pequeño */
     }
 
     .show-title {
@@ -1077,7 +1037,6 @@ body {
 
     .episode-count {
         font-size: 12px;
-        /* Tamaño más pequeño */
     }
 
     .noticia-principal-container {

@@ -26,7 +26,7 @@ class CategoryCrudController extends CrudController
         CRUD::addColumn(['name' => 'name', 'label' => 'Nombre']);
         CRUD::addColumn(['name' => 'slug', 'label' => 'Slug']);
         CRUD::addColumn(['name' => 'description', 'label' => 'Descripción']);
-        CRUD::addColumn([   // image
+        CRUD::addColumn([   
             'name' => 'image',
             'label' => 'Imagen',
             'type' => 'image',
@@ -63,8 +63,8 @@ class CategoryCrudController extends CrudController
             'label' => 'Imagen de la Categoría',
             'type' => 'upload',
             'upload' => true,
-            'disk' => 'public', // El disco donde se guardarán las imágenes (configurado en config/filesystems.php)
-            'prefix' => 'categories/' // Subcarpeta dentro del disco donde se guardarán las imágenes
+            'disk' => 'public', 
+            'prefix' => 'categories/' 
         ]);
     }
 

@@ -249,8 +249,9 @@ $categories = App\Models\Category::orderBy('name')->get();
         .navbar-collapse {
             position: absolute;
             top: 90px;
-            left: 0;
-            width: 100%;
+            left: auto;
+            right: 0;
+            width: 60%;
             background: #fff;
             transition: height 0.3s ease;
             text-align: center;
@@ -301,11 +302,11 @@ $categories = App\Models\Category::orderBy('name')->get();
             <a class="navbar-brand" href="#">
                 <div class="logo-container">
                     @if ($logo)
-                    <img src="{{ $logo }}" alt="Logo">
+                    <img src="{{ $logo }}" alt="Logo" id="homeLogo">                    
                     @endif
 
                     @if ($title)
-                    <span class="title-home">{{ $title }}</span>
+                    <span class="title-home" id="homeTitle">{{ $title }}</span>
                     @endif
 
                     @if (!$logo && !$title)
@@ -374,5 +375,13 @@ $categories = App\Models\Category::orderBy('name')->get();
                 dropdown.classList.remove('show');
             });
         }
+    });
+
+    document.getElementById('homeLogo').addEventListener('click', function() {
+        window.location.href = '{{ route("home") }}';  
+    });
+
+    document.getElementById('homeTitle').addEventListener('click', function() {
+        window.location.href = '{{ route("home") }}';  
     });
 </script>

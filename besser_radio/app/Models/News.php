@@ -78,21 +78,20 @@ class News extends Model
         $disk = 'public';
         $destination_path = 'uploads';
 
-        // Si el valor es un archivo que se ha subido
+     
         if (is_file($value)) {
-            // Borra la imagen anterior si existe
+          
             if ($this->{$attribute_name}) {
                 Storage::disk($disk)->delete($this->{$attribute_name});
             }
 
-            // Guarda el nuevo archivo y actualiza el nombre en la base de datos
             $this->attributes[$attribute_name] = $value->store($destination_path, $disk);
         }
 
-        // Si el valor es un string (por ejemplo, al editar y no cambiar la imagen)
         if (is_string($value)) {
             $this->attributes[$attribute_name] = $value;
         }
+
     }
 
     public function getImageURL()
