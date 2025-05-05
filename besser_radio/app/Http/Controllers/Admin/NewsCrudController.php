@@ -23,96 +23,99 @@ class NewsCrudController extends CrudController
 
     protected function setupListOperation()
     {
-        CRUD::addColumn(['name' => 'title', 'type' => 'text', 'label' => 'Título']);
-        CRUD::addColumn([
-            'name' => 'category_id',
-            'type' => 'relationship',
-            'label' => 'Categoría',
-            'entity' => 'category',
-            'attribute' => 'name',
-            'model' => 'App\Models\Category',
-        ]);
-        CRUD::addColumn(['name' => 'publish_date', 'type' => 'datetime', 'label' => 'Fecha de Publicación']);
-        CRUD::addColumn(['name' => 'status', 'type' => 'enum', 'label' => 'Estado']);
-        CRUD::addColumn(['name' => 'is_featured', 'type' => 'check', 'label' => 'Destacada']);
+        CRUD::column('title')->label('Título');
+        CRUD::column('category_id')->label('Categoría');
+        CRUD::column('publish_date')->label('Fecha de publicación');
+        CRUD::column('status')->label('Estado');
+        CRUD::column('is_featured')->label('Destacada')->type('boolean');
     }
 
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(NewsRequest::class);
-
-        CRUD::addField([
-            'name' => 'category_id',
-            'type' => 'select',
-            'label' => 'Categoría',
-            'entity' => 'category',
-            'model' => 'App\Models\Category',
-            'attribute' => 'name',
-            'options' => (fn ($query) => $query->orderBy('name')->get()),
-            'wrapper' => ['class' => 'form-group col-md-6'],
+        CRUD::setValidation([
+            'title' => 'required|min:2|max:255',
+            'content' => 'required',
+            'image' => 'required|image|max:2048',
+            'category_id' => 'required|exists:categories,id',
+            'author_id' => 'required|exists:users,id',
+            'publish_date' => 'required|date',
+            'status' => 'required|in:draft,published',
         ]);
 
-        CRUD::addField([
-            'name' => 'title',
-            'type' => 'text',
-            'label' => 'Título',
-            'wrapper' => ['class' => 'form-group col-md-6'],
-            'attributes' => ['id' => 'title'],
-        ]);
-
-        CRUD::addField([
-            'name' => 'slug',
-            'type' => 'hidden',
-            'label' => '',
-        ]);
-
-        CRUD::addField([
-            'name' => 'content',
-            'type' => 'textarea',
-            'label' => 'Contenido',
-        ]);
-
-        CRUD::addField([
-            'name' => 'image',
-            'type' => 'upload',
-            'label' => 'Imagen',
-            'upload' => true,
-            'disk' => 'public',
-            'path' => 'uploads/',
-        ]);
-
-        CRUD::addField([
-            'name' => 'publish_date',
-            'type' => 'datetime',
-            'label' => 'Fecha de Publicación',
-            'allows_null' => true,
-            'format' => 'YYYY-MM-DD HH:mm:ss',
-        ]);
-
-        CRUD::addField([
-            'name' => 'is_featured',
-            'type' => 'checkbox',
-            'label' => 'Destacada',
-        ]);
-
-        CRUD::addField([
-            'name' => 'status',
-            'type' => 'enum',
-            'label' => 'Estado',
-            'options' => ['draft' => 'Borrador', 'published' => 'Publicada', 'archived' => 'Archivada'],
-        ]);
-
-        CRUD::addField([
-            'name' => 'author_id',
-            'type' => 'hidden',
-            'default' => backpack_auth()->id(),
-        ]);
-
-        CRUD::setOperationSetting('saveAllInputsExcept', ['_token', '_method', 'http_referrer', 'current_tab', 'save_action']);
+        CRUD::field('title')->label('Título');
+        
+        CRUD::field('category_id')
+            ->label('Categoría')
+            ->type('select')
+            ->entity('category')
+            ->model('App\Models\Category')
+            ->attribute('name');
+        
+        CRUD::field('author_id')
+            ->label('Autor')
+            ->type('select')
+            ->entity('author')
+            ->model('App\Models\User')
+            ->attribute('name');
+        
+        CRUD::field('content')
+            ->label('Contenido')
+            ->type('textarea');
+        
+        // Campo de imagen usando upload (alternativa gratuita)
+        CRUD::field('image')
+            ->label('Imagen')
+            ->type('upload')
+            ->withFiles([
+                'disk' => 'public',
+                'path' => 'uploads',
+            ]);
+        
+        CRUD::field('publish_date')
+            ->label('Fecha de publicación')
+            ->type('datetime');
+        
+        CRUD::field('is_featured')
+            ->label('Destacada')
+            ->type('checkbox');
+        
+        CRUD::field('status')
+            ->label('Estado')
+            ->type('select_from_array')
+            ->options([
+                'draft' => 'Borrador',
+                'published' => 'Publicado'
+            ]);
     }
 
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+        
+        CRUD::setValidation([
+            'title' => 'required|min:2|max:255',
+            'content' => 'required',
+            'image' => 'nullable|image|max:2048',
+            'category_id' => 'required|exists:categories,id',
+            'author_id' => 'required|exists:users,id',
+            'publish_date' => 'required|date',
+            'status' => 'required|in:draft,published',
+        ]);
+    }
+
+    protected function setupShowOperation()
+    {
+        $this->setupListOperation();
+        
+        CRUD::column('content')->label('Contenido')->type('textarea');
+        CRUD::column('slug')->label('Slug');
+        CRUD::column('created_at')->label('Creado');
+        CRUD::column('updated_at')->label('Actualizado');
+        
+        // Mostrar imagen en el show operation
+        CRUD::column('image')
+            ->label('Imagen')
+            ->type('image')
+            ->prefix('storage/');
     }
 }
