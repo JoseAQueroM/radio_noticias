@@ -122,7 +122,7 @@
                 <div class="sticky-top" style="top: 20px;">
                     <div class="sidebar-card">
                         <div class="card-header">
-                            <h3 class="section-title">Te puede interesar</h3>
+                            <h2 class="section-title">Te puede interesar</h2>
                         </div>
                         <div class="card-body">
                             @foreach($randomCategoryNews as $randomNews)
@@ -136,7 +136,8 @@
                                         </h6>
                                         <p class="news-meta">
                                             <i class="far fa-calendar-alt"></i>
-                                            {{ $randomNews->publish_date->format('d M Y') }}
+                                            {{ $randomNews->publish_date->translatedFormat('Y | F d') }}
+
                                         </p>
                                         @if($randomNews->image)
                                         <img src="{{ asset('storage/'.$randomNews->image) }}" class="sidebar-news-image" alt="{{ $randomNews->title }}">

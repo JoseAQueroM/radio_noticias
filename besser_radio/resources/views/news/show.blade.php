@@ -89,7 +89,7 @@
                                         </h6>
                                         <p class="news-meta">
                                             <i class="far fa-calendar-alt"></i>
-                                            {{ $news->publish_date->format('d M Y') }}
+                                            {{ $news->publish_date->translatedFormat('Y | F d') }}
                                         </p>
                                         @if($news->image)
                                         <img src="{{ asset('storage/'.$news->image) }}" class="sidebar-news-image" alt="{{ $news->title }}">

@@ -266,11 +266,7 @@ $categories = App\Models\Category::orderBy('name')->get();
             background-color: #fff;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
-
-        .nav-item {
-            margin: 10px 0;
-        }
-
+        
         #navbarNav {
             justify-content: flex-start;
         }

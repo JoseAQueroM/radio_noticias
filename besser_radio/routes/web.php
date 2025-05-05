@@ -15,9 +15,6 @@ Route::get('/noticias', [NewsController::class, 'index'])->name('news.index');
 // Mostrar los detalles de una noticia
 Route::get('/noticias/{slug}', [NewsController::class, 'show'])->name('news.show');
 
-// Mostrar todas las categorías
-Route::get('/categorias', [CategoryController::class, 'index'])->name('categories.index');
-
 // Mostrar todas las noticias de una categoría
 Route::get('/categorias/{slug}', [CategoryController::class, 'show'])->name('categories.show');
 

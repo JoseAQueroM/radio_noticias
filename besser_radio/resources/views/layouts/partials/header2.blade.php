@@ -265,10 +265,6 @@ $categories = App\Models\Category::orderBy('name')->get();
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .nav-item {
-            margin: 10px 0;
-        }
-
         #navbarNav {
             justify-content: flex-start;
         }
@@ -318,9 +314,10 @@ $categories = App\Models\Category::orderBy('name')->get();
                 </div>
             </a>
 
-           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="custom-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="toggle-text">Menu</span>
+                <span class="toggle-icon"></span>
+            </div>
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-lg-auto me-0">

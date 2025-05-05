@@ -12,15 +12,13 @@
 </head>
 <style>
     /* Estilos principales */
-
-    *{
+    * {
         font-family: "PT Sans", sans-serif !important;
     }
 
     .page-wrapper {
         width: 100%;
     }
-    
 
     .full-width {
         padding-left: 0 !important;
@@ -31,7 +29,6 @@
         padding-left: 10rem !important;
         padding-right: 10rem !important;
     }
-    
 
     /* Efecto zoom para imágenes */
     .zoom-image-container {
@@ -104,6 +101,15 @@
         margin-bottom: 1rem;
     }
 
+    .title-new a {
+        color: inherit;
+        transition: color 0.4s ease;
+    }
+
+    .title-new a:hover {
+        color: rgb(209, 209, 209);
+    }
+
     .subtitle-new {
         font-size: 1.2rem;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
@@ -121,10 +127,10 @@
         color: white;
         font-size: 28px;
         transition: transform 0.2s ease, background-color 0.2s ease;
+        cursor: pointer;
     }
 
     .play-button:hover {
-        background-color: #1ee062;
         transform: scale(1.1);
     }
 
@@ -161,6 +167,118 @@
         overflow: hidden;
     }
 
+    .carousel-control-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: #e6e6e6;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 4px;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+        padding: 0;
+    }
+
+    .carousel-control-btn:hover {
+        background-color: #c0c0c0;
+        transform: scale(1.1);
+    }
+
+    .carousel-control-btn i {
+        font-size: 12px;
+        color: #000000;
+        margin-top: 1px;
+    }
+
+    /* Estilos para el reproductor de radio fijo */
+    .radio-player-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #000;
+        color: white;
+        padding: 15px 20px;
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1000;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .radio-player-info {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        max-width: 60%;
+    }
+
+    .radio-player-title {
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .radio-player-episode {
+        font-size: 0.9rem;
+        color: #aaa;
+    }
+
+    .radio-player-controls {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .radio-player-time {
+        font-size: 0.9rem;
+        color: #aaa;
+        min-width: 80px;
+        text-align: center;
+    }
+
+    .radio-player-progress {
+        flex-grow: 1;
+        height: 4px;
+        background-color: #333;
+        border-radius: 2px;
+        margin: 0 10px;
+        position: relative;
+    }
+
+    .radio-player-progress-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background-color: #1db954;
+        width: 25%;
+        border-radius: 2px;
+    }
+
+    .radio-player-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 5px;
+    }
+
+    .radio-player-btn:hover {
+        color: #1db954;
+    }
+
+    .radio-player-close {
+        margin-left: 15px;
+        font-size: 1.5rem;
+    }
+
     /* Estilos responsive */
     @media (max-width: 768px) {
         .page-wrapper {
@@ -182,7 +300,6 @@
             height: 250px !important;
         }
 
-        /* Ajustes para carrusel principal en móviles */
         #carouselExampleCaptions .carousel-item {
             height: 60vh;
             min-height: 300px;
@@ -213,7 +330,6 @@
             font-size: 1rem;
         }
 
-        /* Ajustes para carrusel de últimas noticias en móviles */
         #episodeCarousel .carousel-item .row {
             flex-wrap: wrap;
             overflow-x: hidden;
@@ -228,7 +344,6 @@
             margin-bottom: 15px;
         }
 
-        /* Estilos para los botones en móviles */
         #episodeCarousel .carousel-controls .btn {
             width: 40px;
             height: 40px;
@@ -237,9 +352,38 @@
             align-items: center;
             justify-content: center;
         }
+
+        /* Reproductor responsive */
+        .radio-player-container {
+            padding: 10px 15px;
+        }
+
+        .radio-player-info {
+            max-width: 50%;
+        }
+
+        .radio-player-title {
+            font-size: 0.9rem;
+        }
+
+        .radio-player-episode {
+            font-size: 0.8rem;
+        }
+
+        .radio-player-controls {
+            gap: 10px;
+        }
+
+        .radio-player-time {
+            min-width: 60px;
+            font-size: 0.8rem;
+        }
+
+        .radio-player-btn {
+            font-size: 1rem;
+        }
     }
 
-    /* Ajustes para pantallas medianas */
     @media (min-width: 768px) and (max-width: 992px) {
         #episodeCarousel .carousel-item .col-sm-6 {
             flex: 0 0 50%;
@@ -253,7 +397,7 @@
         <!-- Header -->
         @include('layouts.partials.header')
 
-        <!-- Sección del carrusel principal (sin padding) -->
+        <!-- Sección del carrusel principal -->
         <div id="carouselExampleCaptions" class="carousel slide full-width">
             <div class="carousel-inner">
                 @foreach ($randomCarouselNews as $key => $newsItem)
@@ -261,12 +405,18 @@
                     <img src="{{ $newsItem->image ? asset('storage/' . $newsItem->image) : 'https://via.placeholder.com/1200x800?text=Sin+Imagen' }}" class="d-block w-100" alt="{{ $newsItem->title }}">
                     <div class="carousel-caption">
                         <p class="subtitle-new fw-bold">{{ $newsItem->category->name ?? 'Sin categoría' }}</p>
-                        <h1 class="title-new px-3 fw-bold">{{ $newsItem->title }}</h1>
+                        <h1 class="title-new px-3 fw-bold">
+                            <a href="{{ route('news.show', $newsItem->slug) }}" class="text-decoration-none">
+                                {{ $newsItem->title }}
+                            </a>
+                        </h1>
+
                         <p class="subtitle-new">{{ $newsItem->publish_date->isoFormat('Y | MMMM d') }}</p>
                         <div class="d-inline-flex align-items-center gap-2 play-button-wrapper">
-                            <a class="play-button">
+                            <audio class="audio-player" src="http://stream.srg-ssr.ch/m/rsj/mp3_128" type="audio/mpeg"></audio>
+                            <div class="play-button">
                                 <i class="bi bi-play-fill"></i>
-                            </a>
+                            </div>
                             <span class="play-text fw-bold">Escuchar ahora</span>
                         </div>
                     </div>
@@ -275,30 +425,53 @@
             </div>
 
             @if ($randomCarouselNews->count() > 1)
-
-
             <a class="carousel-control-prev me-3" href="#carouselExampleCaptions" role="button" data-bs-slide="prev">
-                <i class="bi bi-play-circle-fill" style="transform: rotate(180deg); font-size: 1.8rem;"></i>
+                <i class="bi bi-play-circle-fill" style="transform: rotate(180deg); font-size: 1.6rem;"></i>
             </a>
             <a class="carousel-control-next ms-3" href="#carouselExampleCaptions" role="button" data-bs-slide="next">
-                <i class="bi bi-play-circle-fill" style="font-size: 1.8rem;"></i>
+                <i class="bi bi-play-circle-fill" style="font-size: 1.6rem;"></i>
             </a>
-
-
             @endif
         </div>
 
-        <!-- Sección de noticias (con padding) -->
+        <!-- Reproductor de radio fijo -->
+        <div class="radio-player-container" id="radioPlayer">
+            <div class="radio-player-info">
+                <div class="radio-player-title">Radio A1TV</div>
+            </div>
+            
+            <div class="radio-player-controls">
+              
+                <button class="radio-player-btn" id="radioPlayPause">
+                    <i class="bi bi-pause-fill"></i>
+                </button>
+                
+            </div>
+            
+            <div class="radio-player-time">
+                <span id="radioCurrentTime">00:06</span> / <span id="radioDuration">02:47</span>
+            </div>
+            
+            <div class="radio-player-progress">
+                <div class="radio-player-progress-bar" id="radioProgressBar"></div>
+            </div>
+            
+            <button class="radio-player-btn radio-player-close" id="radioClose">
+                <i class="bi bi-x"></i>
+            </button>
+        </div>
+
+        <!-- Sección de noticias -->
         <section class="py-4 bg-white">
             <div class="container px-3 wide-container">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h2 class="fw-bold m-0 section-title">Últimas noticias</h2>
                     <div class="carousel-controls">
-                        <button class="btn btn-outline-dark me-2 rounded-circle" type="button" data-bs-target="#episodeCarousel" data-bs-slide="prev">
-                            <i class="bi bi-chevron-left"></i>
+                        <button class="carousel-control-btn" data-bs-target="#episodeCarousel" data-bs-slide="prev">
+                            <i class="bi bi-caret-left-fill"></i>
                         </button>
-                        <button class="btn btn-outline-dark rounded-circle" type="button" data-bs-target="#episodeCarousel" data-bs-slide="next">
-                            <i class="bi bi-chevron-right"></i>
+                        <button class="carousel-control-btn" data-bs-target="#episodeCarousel" data-bs-slide="next">
+                            <i class="bi bi-caret-right-fill"></i>
                         </button>
                     </div>
                 </div>
@@ -320,10 +493,10 @@
                                                 @endif
                                             </div>
                                             <div class="card-body text-dark p-3">
-                                                <small class="fw-bold text-uppercase text-success d-block mb-1">
+                                                <small style="color: #1ee062;" class=" d-block mb-1">
                                                     {{ $newsItem->category->name ?? 'Sin Categoría' }}
                                                 </small>
-                                                <h6 class="fw-bold mb-1 fs-6">{{ $newsItem->title }}</h6>
+                                                <h6 class="fw-bold mb-1 fs-4">{{ $newsItem->title }}</h6>
                                             </div>
                                         </div>
                                     </a>
@@ -337,30 +510,63 @@
             </div>
         </section>
 
-        <!-- Sección de redes sociales (sin padding) -->
+        <!-- Sección de redes sociales -->
         <div class="social-section full-width">
             <h2 class="fw-bold text-center mb-4 title-social">Síguenos en nuestras redes:</h2>
-            <div class="d-flex justify-content-center align-items-center flex-wrap gap-4">
-                <a href="#" class="social-btn">
-                    <i class="bi bi-instagram"></i>
-                    <span>Instagram</span>
-                </a>
-                <a href="#" class="social-btn">
-                    <i class="bi bi-facebook"></i>
-                    <span>Facebook</span>
-                </a>
-                <a href="#" class="social-btn">
-                    <i class="bi bi-twitter"></i>
-                    <span>Twitter</span>
-                </a>
-                <a href="#" class="social-btn">
-                    <i class="bi bi-spotify"></i>
-                    <span>Spotify</span>
-                </a>
+            <div class="container">
+                <!-- Versión móvil -->
+                <div class="row g-3 d-flex d-md-none justify-content-center mb-3">
+                    <div class="col-6 col-sm-5 text-center">
+                        <a href="#" class="social-btn d-block mx-auto">
+                            <i class="bi bi-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                    </div>
+                    <div class="col-6 col-sm-5 text-center">
+                        <a href="#" class="social-btn d-block mx-auto">
+                            <i class="bi bi-facebook"></i>
+                            <span>Facebook</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="row g-3 d-flex d-md-none justify-content-center">
+                    <div class="col-6 col-sm-5 text-center">
+                        <a href="#" class="social-btn d-block mx-auto">
+                            <i class="bi bi-twitter"></i>
+                            <span>Twitter</span>
+                        </a>
+                    </div>
+                    <div class="col-6 col-sm-5 text-center">
+                        <a href="#" class="social-btn d-block mx-auto">
+                            <i class="bi bi-spotify"></i>
+                            <span>Spotify</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Versión desktop -->
+                <div class="d-none d-md-flex justify-content-center flex-wrap gap-4">
+                    <a href="#" class="social-btn">
+                        <i class="bi bi-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="#" class="social-btn">
+                        <i class="bi bi-facebook"></i>
+                        <span>Facebook</span>
+                    </a>
+                    <a href="#" class="social-btn">
+                        <i class="bi bi-twitter"></i>
+                        <span>Twitter</span>
+                    </a>
+                    <a href="#" class="social-btn">
+                        <i class="bi bi-spotify"></i>
+                        <span>Spotify</span>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <!-- Otras noticias (con padding) -->
+        <!-- Otras noticias -->
         <div class="container wide-container mt-5">
             <h2 class="fw-bold section-title">Otras noticias</h2>
             <a href="{{ route('news.index') }}" class="view-all mb-5 rf rf-triangle-right">Mostrar todas las noticias</a>
@@ -388,40 +594,218 @@
                     </div>
 
                     <div class="col-md-4">
-                @if ($chunk->count() > 1)
-                @foreach ($chunk->skip(1)->take(3) as $newsItem)
-                <div class="right-show-small mb-3">
-                    <!-- Enlace que cubre imagen + texto -->
-                    <a href="{{ route('news.show', $newsItem->slug) }}" class="d-flex text-decoration-none text-dark zoom-image-container">
-                        @if ($newsItem->image)
-                        <img src="{{ asset('storage/' . $newsItem->image) }}" 
-                             class="img-fluid rounded zoom-image" 
-                             alt="{{ $newsItem->title }}"
-                             style="width: 100px; height: 100px; object-fit: cover; transition: transform 0.3s ease;">
-                        @else
-                        <img src="https://via.placeholder.com/500x150?text=Sin+Imagen" 
-                             class="img-fluid rounded zoom-image" 
-                             alt="Sin Imagen"
-                             style="width: 100px; height: 100px; object-fit: cover; transition: transform 0.3s ease;">
-                        @endif
-                        <div class="small-info ms-3">
-                            <div class="show-title">{{ $newsItem->category->name ?? 'Sin Categoría' }}</div>
-                            <div class="episode-count">{{ Str::limit($newsItem->title, 50, '...') }}</div>
+                        @if ($chunk->count() > 1)
+                        @foreach ($chunk->skip(1)->take(3) as $newsItem)
+                        <div class="right-show-small mb-3">
+                            <a href="{{ route('news.show', $newsItem->slug) }}" class="d-flex text-decoration-none text-dark zoom-image-container">
+                                @if ($newsItem->image)
+                                <img src="{{ asset('storage/' . $newsItem->image) }}"
+                                    class="img-fluid rounded zoom-image"
+                                    alt="{{ $newsItem->title }}"
+                                    style="width: 100px; height: 100px; object-fit: cover; transition: transform 0.3s ease;">
+                                @else
+                                <img src="https://via.placeholder.com/500x150?text=Sin+Imagen"
+                                    class="img-fluid rounded zoom-image"
+                                    alt="Sin Imagen"
+                                    style="width: 100px; height: 100px; object-fit: cover; transition: transform 0.3s ease;">
+                                @endif
+                                <div class="small-info ms-3">
+                                    <div class="show-title">{{ $newsItem->category->name ?? 'Sin Categoría' }}</div>
+                                    <div class="episode-count">{{ Str::limit($newsItem->title, 50, '...') }}</div>
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                </div>
-                @endforeach
-                @endif
-            </div>
+                        @endforeach
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Footer (sin padding) -->
+        <!-- Footer -->
         @include('layouts.partials.footer')
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const radioPlayer = document.getElementById('radioPlayer');
+            const radioPlayPauseBtn = document.getElementById('radioPlayPause');
+            const radioCloseBtn = document.getElementById('radioClose');
+            const radioBack15Btn = document.getElementById('radioBack15');
+            const radioForward15Btn = document.getElementById('radioForward15');
+            const radioProgressBar = document.getElementById('radioProgressBar');
+            const radioCurrentTime = document.getElementById('radioCurrentTime');
+            const radioDuration = document.getElementById('radioDuration');
+            
+            let currentAudioPlayer = null;
+            let isPlaying = false;
+
+            // Controlador para los botones de play/pause
+            document.querySelectorAll('.play-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const carouselItem = this.closest('.carousel-item');
+                    const audioPlayer = carouselItem.querySelector('.audio-player');
+                    const icon = this.querySelector('i');
+                    
+                    // Si ya está reproduciendo y es el mismo, pausar
+                    if (currentAudioPlayer === audioPlayer && !audioPlayer.paused) {
+                        audioPlayer.pause();
+                        icon.classList.replace('bi-pause-fill', 'bi-play-fill');
+                        radioPlayPauseBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
+                        isPlaying = false;
+                        return;
+                    }
+                    
+                    // Pausar todos los demás reproductores de audio
+                    document.querySelectorAll('.audio-player').forEach(player => {
+                        if (player !== audioPlayer) {
+                            player.pause();
+                            // Actualizar iconos de otros botones
+                            const otherButton = player.closest('.carousel-item').querySelector('.play-button');
+                            if (otherButton) {
+                                otherButton.querySelector('i').classList.replace('bi-pause-fill', 'bi-play-fill');
+                            }
+                        }
+                    });
+
+                    // Controlar el reproductor actual
+                    if (audioPlayer.paused) {
+                        audioPlayer.play()
+                            .then(() => {
+                                icon.classList.replace('bi-play-fill', 'bi-pause-fill');
+                                radioPlayPauseBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+                                currentAudioPlayer = audioPlayer;
+                                isPlaying = true;
+                                radioPlayer.style.display = 'flex';
+                                
+                                // Actualizar tiempo y progreso
+                                updatePlayerTime();
+                                setInterval(updatePlayerTime, 1000);
+                            })
+                            .catch(e => {
+                                console.error("Error al reproducir:", e);
+                                alert("Error al conectar con la radio");
+                            });
+                    } else {
+                        audioPlayer.pause();
+                        icon.classList.replace('bi-pause-fill', 'bi-play-fill');
+                        radioPlayPauseBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
+                        isPlaying = false;
+                    }
+                });
+            });
+
+            // Controlador para el botón de play/pause del reproductor fijo
+            radioPlayPauseBtn.addEventListener('click', function() {
+                if (currentAudioPlayer) {
+                    if (isPlaying) {
+                        currentAudioPlayer.pause();
+                        this.innerHTML = '<i class="bi bi-play-fill"></i>';
+                        isPlaying = false;
+                        
+                        // Actualizar botón en el carrusel
+                        const playButton = document.querySelector('.carousel-item.active .play-button i');
+                        if (playButton) {
+                            playButton.classList.replace('bi-pause-fill', 'bi-play-fill');
+                        }
+                    } else {
+                        currentAudioPlayer.play()
+                            .then(() => {
+                                this.innerHTML = '<i class="bi bi-pause-fill"></i>';
+                                isPlaying = true;
+                                
+                                // Actualizar botón en el carrusel
+                                const playButton = document.querySelector('.carousel-item.active .play-button i');
+                                if (playButton) {
+                                    playButton.classList.replace('bi-play-fill', 'bi-pause-fill');
+                                }
+                            });
+                    }
+                }
+            });
+
+            // Controlador para el botón de cerrar
+            radioCloseBtn.addEventListener('click', function() {
+                if (currentAudioPlayer) {
+                    currentAudioPlayer.pause();
+                    isPlaying = false;
+                    radioPlayer.style.display = 'none';
+                    
+                    // Actualizar botón en el carrusel
+                    const playButton = document.querySelector('.carousel-item.active .play-button i');
+                    if (playButton) {
+                        playButton.classList.replace('bi-pause-fill', 'bi-play-fill');
+                    }
+                }
+            });
+
+            // Controlador para retroceder 15 segundos
+            radioBack15Btn.addEventListener('click', function() {
+                if (currentAudioPlayer) {
+                    currentAudioPlayer.currentTime = Math.max(0, currentAudioPlayer.currentTime - 15);
+                    updatePlayerTime();
+                }
+            });
+
+            // Controlador para avanzar 15 segundos
+            radioForward15Btn.addEventListener('click', function() {
+                if (currentAudioPlayer) {
+                    currentAudioPlayer.currentTime = Math.min(currentAudioPlayer.duration, currentAudioPlayer.currentTime + 15);
+                    updatePlayerTime();
+                }
+            });
+
+            // Función para actualizar el tiempo y la barra de progreso
+            function updatePlayerTime() {
+                if (currentAudioPlayer) {
+                    const currentTime = formatTime(currentAudioPlayer.currentTime);
+                    const duration = formatTime(currentAudioPlayer.duration);
+                    
+                    radioCurrentTime.textContent = currentTime;
+                    radioDuration.textContent = duration;
+                    
+                    const progress = (currentAudioPlayer.currentTime / currentAudioPlayer.duration) * 100;
+                    radioProgressBar.style.width = `${progress}%`;
+                }
+            }
+
+            // Función para formatear el tiempo (MM:SS)
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
+
+            // Actualizar el estado del botón cuando cambia el carrusel
+            const myCarousel = document.getElementById('carouselExampleCaptions');
+            myCarousel.addEventListener('slid.bs.carousel', function() {
+                const activeItem = this.querySelector('.carousel-item.active');
+                const activeAudio = activeItem.querySelector('.audio-player');
+                const activeButton = activeItem.querySelector('.play-button');
+
+                if (activeAudio && !activeAudio.paused) {
+                    activeButton.querySelector('i').classList.replace('bi-play-fill', 'bi-pause-fill');
+                } else {
+                    activeButton.querySelector('i').classList.replace('bi-pause-fill', 'bi-play-fill');
+                }
+            });
+
+            // Pausar todos los reproductores cuando se hace clic fuera
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.play-button') && !e.target.closest('.carousel-control') && !e.target.closest('#radioPlayer')) {
+                    document.querySelectorAll('.audio-player').forEach(player => {
+                        player.pause();
+                        const button = player.closest('.carousel-item').querySelector('.play-button');
+                        if (button) {
+                            button.querySelector('i').classList.replace('bi-pause-fill', 'bi-play-fill');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    
     <script src="{{ asset('assets/js/script.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-5.3.5/js/bootstrap.bundle.min.js') }}"></script>
 </body>
-
 </html>
